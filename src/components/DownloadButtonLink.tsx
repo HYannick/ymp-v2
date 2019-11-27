@@ -1,10 +1,9 @@
 import React from 'react';
-import DownloadIcon from "../core/svg/Download";
+import DownloadIcon from "core/svg/Download";
 import styled from "@emotion/styled";
-import {Link} from "@reach/router";
 
 
-const DownloadButton: any = styled(Link)`
+const DownloadButton: any = styled('div')`
   position: fixed;
   z-index: 4000;
   bottom: 2rem;
@@ -55,9 +54,9 @@ DownloadButton.Chip = styled('span')`
   font-weight: bold;
 `;
 
-const DownloadButtonLink: React.FC<{downloadCount: number}> = ({downloadCount}) => {
+const DownloadButtonLink: React.FC<{downloadCount: number, onClick: any}> = ({downloadCount, onClick}) => {
   return (
-    <DownloadButton to="/downloads">
+    <DownloadButton onClick={onClick}>
       <div>
         {!!downloadCount &&  <DownloadButton.Chip>{downloadCount}</DownloadButton.Chip>}
         <DownloadIcon/>

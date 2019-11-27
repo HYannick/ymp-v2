@@ -1,10 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="222847b3-b5cc-49f3-b2f4-3edced171950" name="Default Changelist" comment="first commit">
+      <change afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/List/SongListItem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/svg/DownloadLink.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/svg/Spinner.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/panel.hooks.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/reducers/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/helpers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/socket.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/app.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/app.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/app.actions.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/app.actions.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DownloadButtonLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DownloadButtonLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/List.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/List/List.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Panel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Panel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/use-get-song-list.hook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/use-get-song-list.hook.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/song.reducer.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/song.reducer.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/song.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/song.reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/DownloadList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/DownloadList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
   <component name="FileColors">
     <fileColor scope="Non-Project Files (Material Default)" color="2E3C43" />
     <fileColor scope="Non-Project Files (Material Darker)" color="323232" />
     <fileColor scope="Non-Project Files (Material Lighter)" color="eae8e8" />
     <fileColor scope="Non-Project Files (Material Palenight)" color="2f2e43" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="React Func Based Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -14,15 +67,38 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1Tqp0p2xUSgO8Px019EdcfCEemf" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="JavaScriptPreferStrict" value="false" />
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.15.3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/core/svg" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/react-scripts" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="/usr/local/bin/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="settings.webpack" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/List" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/core/svg" />
+      <recent name="$PROJECT_DIR$/src/reducers" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/actions" />
+      <recent name="$PROJECT_DIR$/src/components" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -35,5 +111,149 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager" selected="Jest.songReducer.should set requestId">
+    <configuration name="Mappers.mapTransitions" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/services/mappers.service.spec.ts" />
+      <test-names>
+        <test-name value="Mappers" />
+        <test-name value="mapTransitions" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="appReducer (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/reducers/song.reducer.spec.ts" />
+      <test-names>
+        <test-name value="appReducer" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="songReducer" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/reducers/song.reducer.spec.ts" />
+      <test-names>
+        <test-name value="songReducer" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="songReducer.should set loading to true" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/reducers/song.reducer.spec.ts" />
+      <test-names>
+        <test-name value="songReducer" />
+        <test-name value="should set loading to true" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="songReducer.should set requestId" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/reducers/song.reducer.spec.ts" />
+      <test-names>
+        <test-name value="songReducer" />
+        <test-name value="should set requestId" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="npm start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.songReducer.should set requestId" />
+        <item itemvalue="Jest.songReducer" />
+        <item itemvalue="Jest.songReducer.should set loading to true" />
+        <item itemvalue="Jest.appReducer (1)" />
+        <item itemvalue="Jest.Mappers.mapTransitions" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="222847b3-b5cc-49f3-b2f4-3edced171950" name="Default Changelist" comment="" />
+      <created>1574197259696</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574197259696</updated>
+      <workItem from="1574197261341" duration="6099000" />
+      <workItem from="1574292472913" duration="61772000" />
+      <workItem from="1574609457455" duration="197000" />
+      <workItem from="1574613045397" duration="202000" />
+      <workItem from="1574684761309" duration="6265000" />
+      <workItem from="1574697348365" duration="31463000" />
+    </task>
+    <task id="LOCAL-00001" summary="first commit">
+      <created>1574498020122</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1574498020122</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/index.d.ts" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
   </component>
 </project>

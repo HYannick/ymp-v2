@@ -1,22 +1,20 @@
 /** @jsx jsx */
-import React, {createContext, useState} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 
 import {Global, jsx} from "@emotion/core";
 
-import {IStateProps} from "reducers/song.reducer";
-
-import {Router} from "@reach/router"
 import Home, {Avatar} from 'views/Home';
-import DownloadList from 'views/DownloadList';
 import {globalStyles} from "./global-styles";
 import avatarUrl from "./static/avatar-1.png";
 import styled from "@emotion/styled";
 import Settings from "./components/Settings";
 import Panel from "./components/Panel";
+import usePanel from "./hooks/panel.hooks";
+import {useSelector} from "react-redux";
+import {songReducerSelector} from "./reducers/song.reducer";
+import {revokeURLs} from "./services/helpers";
 
-
-export const AppContext = createContext<IStateProps | any>(undefined);
 
 const Header = styled('div')`
   width: 100%;
@@ -34,7 +32,7 @@ const MainLayout = styled('div')`
   flex-direction: column;
 `;
 
-const StyledRouter = styled(Router)`
+const StyledWrapper = styled('div')`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -42,20 +40,27 @@ const StyledRouter = styled(Router)`
 
 
 const App: React.FC = () => {
-  const [isPanelOpen, setPanelOpen] = useState(false);
+  const {isPanelOpen, openPanel, closePanel} = usePanel();
+  const {downloads}: any = useSelector(songReducerSelector);
+
+  useEffect(() => {
+    return function cleanCache() {
+      console.log('cleaning');
+      revokeURLs(downloads.cache);
+    }
+  }, []);
   return (
     <MainLayout>
       <Global styles={globalStyles}/>
       <Header>
-        <Avatar bgUrl={avatarUrl} onClick={() => setPanelOpen(true)}/>
+        <Avatar bgUrl={avatarUrl} onClick={openPanel}/>
       </Header>
-      <Panel isPanelOpen={isPanelOpen} handleClose={() => setPanelOpen(false)}>
+      <Panel isPanelOpen={isPanelOpen} handleClose={closePanel} orientation="right" title="Settings">
         <Settings/>
       </Panel>
-      <StyledRouter>
+      <StyledWrapper>
         <Home path="/"/>
-        <DownloadList path="/downloads"/>
-      </StyledRouter>
+      </StyledWrapper>
     </MainLayout>
   );
 };

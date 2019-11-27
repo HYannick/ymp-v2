@@ -1,10 +1,10 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
 import styled from "@emotion/styled";
 import SearchIcon from "core/svg/Search";
 import {resetSongList, setSearch} from "actions/app.actions";
 import {transitions} from "polished";
 import CloseIcon from 'core/svg/CloseIcon';
-import {SongContext} from "views/Home";
+import {useDispatch} from "react-redux";
 
 const Wrapper = styled('form')<{ onSubmit: any }>`
   height: 15rem;
@@ -31,6 +31,7 @@ const Wrapper = styled('form')<{ onSubmit: any }>`
     background: transparent;
     outline: white;
     padding-left: 2rem;
+    padding-right: 4rem;
     font-weight: bold;
     font-size: 1.6rem;
   }
@@ -73,7 +74,7 @@ const Button = styled('button')<{ hasQuery: boolean }>`
   }
 `;
 
-const EmptyInputButton = styled('button')<{hasQuery: boolean}>`
+const EmptyInputButton = styled('button')<{ hasQuery: boolean }>`
   position: absolute;
   right: 6.5rem;
   top: 0;
@@ -95,7 +96,7 @@ const EmptyInputButton = styled('button')<{hasQuery: boolean}>`
   }
 `;
 const Form: React.FC = () => {
-  const {dispatch} = useContext(SongContext);
+  const dispatch = useDispatch();
   const [query, setQuery] = useState('');
   const handleChange = (e: any) => setQuery(e.target.value);
   const submitSearch = (e: any) => {
@@ -115,7 +116,7 @@ const Form: React.FC = () => {
       <div>
         <input type="text" value={query} placeholder="Video ID, Song name..." onChange={handleChange}/>
         <EmptyInputButton type="reset" onClick={resetSearch} hasQuery={query.length !== 0}>
-          <CloseIcon />
+          <CloseIcon/>
         </EmptyInputButton>
         <Button type="submit" hasQuery={query.length !== 0}>
           <SearchIcon/>

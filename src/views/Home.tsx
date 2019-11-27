@@ -1,14 +1,20 @@
 /** @jsx jsx */
-import {createContext, useReducer} from 'react';
 import {css, jsx} from "@emotion/core";
 import Form from "components/Form";
-import List from "components/List";
+import List from "components/List/List";
 import bgFooter from "static/bg-footer.png";
 import DownloadButtonLink from "components/DownloadButtonLink";
 import styled from "@emotion/styled";
 import {useGetSongList} from "hooks/use-get-song-list.hook";
-import songReducer, {initialState} from "reducers/song.reducer";
-import {IStateProps} from "reducers/song.reducer";
+import {songReducerSelector} from "reducers/song.reducer";
+import {addDownloadItem} from "../actions/app.actions";
+import {useDispatch, useSelector} from "react-redux";
+import {ListItem} from "components/List/SongListItem";
+import {socket} from "socket";
+import Panel from "components/Panel";
+import DownloadList from "./DownloadList";
+import usePanel from "hooks/panel.hooks";
+import React from "react";
 
 
 const Logo = styled('div')`
@@ -46,30 +52,37 @@ const HelperText = styled('p')`
 
 `;
 
+const Home: React.FC = () => {
+  const {songList, searchQuery, downloads}: any = useSelector(songReducerSelector);
+  const {isPanelOpen, openPanel, closePanel} = usePanel();
+  const dispatch = useDispatch();
 
-export const SongContext = createContext<IStateProps | any>(undefined);
+  const initDownload = (item: any) => {
+    socket.emit('start_dl', item.link);
+    dispatch(addDownloadItem(item));
+  };
 
-const Home = () => {
-  const [state, dispatch] = useReducer(songReducer, initialState);
-  const {songList, searchQuery, downloadList} = state;
   useGetSongList(searchQuery, dispatch);
   return (
-    <SongContext.Provider value={{state, dispatch}}>
-        <Logo>YmP</Logo>
-        <Form/>
-        <div css={css`flex: 1; padding: 0 2rem`}>
-          <List items={songList}>
-            <HelperText>
-              Fill your youtube link
-              And let me convert it.
-              <br/>
-              If you like the song, support the artist, subscribe, like, buy and share ;)
-            </HelperText>
-          </List>
-        </div>
-        <Footer bgUrl={bgFooter}/>
-        <DownloadButtonLink downloadCount={downloadList.length}/>
-    </SongContext.Provider>
+    <div>
+      <Logo>YmP</Logo>
+      <Form/>
+      <div css={css`flex: 1; padding: 0 2rem`}>
+        <List items={songList} itemTemplate={ListItem} onItemClick={initDownload}>
+          <HelperText>
+            Fill your youtube link
+            And let me convert it.
+            <br/>
+            If you like the song, support the artist, subscribe, like, buy and share ;)
+          </HelperText>
+        </List>
+      </div>
+      <Footer bgUrl={bgFooter}/>
+      <DownloadButtonLink downloadCount={downloads.pendingCount} onClick={openPanel}/>
+      <Panel isPanelOpen={isPanelOpen} handleClose={closePanel} orientation="bottom" title="Pending downloads">
+        <DownloadList downloadList={downloads.pending} onClose={closePanel} />
+      </Panel>
+    </div>
   );
 };
 

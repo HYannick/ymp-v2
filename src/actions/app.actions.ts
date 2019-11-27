@@ -1,5 +1,10 @@
 import {ActionTypes, DownloadItemTypes, SongItemProps} from "./app.actions.types";
 
+export const setRequestId = (id: boolean) => ({
+  type: ActionTypes.SET_REQUEST_ID,
+  id
+});
+
 export const setLoading = (isLoading: boolean) => ({
   type: ActionTypes.SET_LOADING,
   isLoading
@@ -18,6 +23,12 @@ export const setSongList = (list: SongItemProps[]) => ({
 export const addDownloadItem = (item: DownloadItemTypes) => ({
   type: ActionTypes.ADD_DOWNLOAD_ITEM,
   item
+});
+
+export const addToCompleted = (item: DownloadItemTypes, src: string) => ({
+  type: ActionTypes.DOWNLOAD_COMPLETE,
+  item,
+  src
 });
 
 export const setSearch = (query: string) => ({

@@ -16,5 +16,5 @@ export const useGetSongList = (query: string, dispatch: any) => {
     if (query) {
       getVideos()
     }
-  }, [query, dispatch]);
+   }, [dispatch, query]);
 };
