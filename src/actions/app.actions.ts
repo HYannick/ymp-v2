@@ -1,6 +1,6 @@
 import {ActionTypes, DownloadItemTypes, SongItemProps} from "./app.actions.types";
 
-export const setRequestId = (id: boolean) => ({
+export const setRequestId = (id: string) => ({
   type: ActionTypes.SET_REQUEST_ID,
   id
 });

@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import React, {useEffect} from 'react';
+import React, {useEffect, Fragment, useState} from 'react';
 import './App.css';
 
-import {Global, jsx} from "@emotion/core";
+import {css, Global, jsx} from "@emotion/core";
 
 import Home, {Avatar} from 'views/Home';
 import {globalStyles} from "./global-styles";
@@ -14,6 +14,7 @@ import usePanel from "./hooks/panel.hooks";
 import {useSelector} from "react-redux";
 import {songReducerSelector} from "./reducers/song.reducer";
 import {revokeURLs} from "./services/helpers";
+import LoaderCon from "./core/svg/LoaderCon";
 
 
 const Header = styled('div')`
@@ -38,29 +39,61 @@ const StyledWrapper = styled('div')`
   flex-direction: column;
 `;
 
+const Loader = styled('div')`
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  flex-direction: column;
+  font-weight: bold;
+  width: 100%; 
+  height: 100vh;
+  svg {
+    width: 9rem;
+    height: 9rem;
+    stroke: ${({theme}: any) => theme.body};
+    margin-bottom: 1.5rem;
+  }
+`;
+
 
 const App: React.FC = () => {
   const {isPanelOpen, openPanel, closePanel} = usePanel();
-  const {downloads}: any = useSelector(songReducerSelector);
+  const {downloads, requestId}: any = useSelector(songReducerSelector);
+  const [reconMessage, setReconMessage] = useState('');
 
   useEffect(() => {
+    if (!requestId) {
+      setTimeout(() => setReconMessage('Unable to connect :(...Try to reopen the app!'), 8000);
+    }
     return function cleanCache() {
       console.log('cleaning');
       revokeURLs(downloads.cache);
     }
-  }, []);
+  }, [requestId]);
+
   return (
     <MainLayout>
       <Global styles={globalStyles}/>
-      <Header>
-        <Avatar bgUrl={avatarUrl} onClick={openPanel}/>
-      </Header>
-      <Panel isPanelOpen={isPanelOpen} handleClose={closePanel} orientation="right" title="Settings">
-        <Settings/>
-      </Panel>
-      <StyledWrapper>
-        <Home path="/"/>
-      </StyledWrapper>
+      {requestId ? (
+        <Fragment>
+          <Header>
+            <Avatar bgUrl={avatarUrl} onClick={openPanel}/>
+          </Header>
+          <Panel isPanelOpen={isPanelOpen} handleClose={closePanel} orientation="right" title="Settings">
+            <Settings/>
+          </Panel>
+          <StyledWrapper>
+            <Home path="/"/>
+          </StyledWrapper>
+        </Fragment>
+      ) : (
+        <Loader>
+          <LoaderCon/>
+          Connecting...
+          <span>{reconMessage}</span>
+        </Loader>
+      )}
+
     </MainLayout>
   );
 };
