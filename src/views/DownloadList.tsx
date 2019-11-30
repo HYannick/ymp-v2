@@ -7,7 +7,6 @@ import {css, jsx} from "@emotion/core";
 import styled from '@emotion/styled';
 import DownloadIcon from "core/svg/Download";
 import {resetDownloadList} from "../actions/app.actions";
-import CloseIcon from "../core/svg/CloseIcon";
 
 const Wrapper = styled('div')`
   padding: 0 1rem;

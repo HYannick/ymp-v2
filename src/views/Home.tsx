@@ -16,13 +16,6 @@ import DownloadList from "./DownloadList";
 import usePanel from "hooks/panel.hooks";
 import React from "react";
 
-
-const Logo = styled('div')`
-  font-size: 5rem;
-  font-weight: bold;
-  text-align: center;
-`;
-
 export const Avatar = styled('button')<{ bgUrl: string }>`
   display: block;
   cursor: pointer;
@@ -65,7 +58,7 @@ const Home: React.FC = () => {
   useGetSongList(searchQuery, dispatch);
   return (
     <div>
-      <Logo>YmP</Logo>
+
       <Form/>
       <div css={css`flex: 1; padding: 0 2rem`}>
         <List items={songList} itemTemplate={ListItem} onItemClick={initDownload}>

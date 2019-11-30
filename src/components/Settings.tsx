@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import React from 'react';
 import {css, jsx} from "@emotion/core";
-import avatarUrl from "../static/avatar-1.png";
 import {useTheme} from "../ThemeProvider";
 import styled from "@emotion/styled";
 
@@ -59,45 +58,11 @@ const Option: React.FC<SettingsTypes> = ({label, options}) => {
 const Settings: React.FC = () => {
   const themeState = useTheme();
 
-  const setAvatar = (avatar: string) => {
-    console.log('avatar', avatar)
-  };
-
   const setLang = (lang: string) => {
     console.log('lang', lang)
   };
 
   const settings: SettingsTypes[] = [
-    {
-      id: 'avatar',
-      label: 'Avatar',
-      options: [
-        {
-          id: 1,
-          name: 'avatar-1',
-          media: avatarUrl,
-          action: () => setAvatar(avatarUrl)
-        },
-        {
-          id: 2,
-          name: 'avatar-2',
-          media: avatarUrl,
-          action: () => setAvatar(avatarUrl)
-        },
-        {
-          id: 3,
-          name: 'avatar-3',
-          media: avatarUrl,
-          action: () => setAvatar(avatarUrl)
-        },
-        {
-          id: 4,
-          name: 'avatar-4',
-          media: avatarUrl,
-          action: () => setAvatar(avatarUrl)
-        },
-      ]
-    },
     {
       id: 'dark-mode',
       label: 'Dark Theme',

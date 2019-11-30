@@ -4,9 +4,8 @@ import './App.css';
 
 import {css, Global, jsx} from "@emotion/core";
 
-import Home, {Avatar} from 'views/Home';
+import Home from 'views/Home';
 import {globalStyles} from "./global-styles";
-import avatarUrl from "./static/avatar-1.png";
 import styled from "@emotion/styled";
 import Settings from "./components/Settings";
 import Panel from "./components/Panel";
@@ -15,13 +14,30 @@ import {useSelector} from "react-redux";
 import {songReducerSelector} from "./reducers/song.reducer";
 import {revokeURLs} from "./services/helpers";
 import LoaderCon from "./core/svg/LoaderCon";
+import HistoryIcon from "./core/svg/HistoryIcon";
+import ConfigIcon from "./core/svg/ConfigIcon";
 
+
+
+export const Logo = styled('div')`
+  font-size: 5rem;
+  font-weight: bold;
+  text-align: center;
+  transform: translateY(1rem);
+`;
 
 const Header = styled('div')`
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-  padding: 1rem;
+  padding: 2rem;
+  align-items: center;
+  svg {
+    width: 3rem;
+    height: 3rem;
+    path {
+      fill: ${({theme}: any) => theme.body}
+    }
+  }
 `;
 
 const MainLayout = styled('div')`
@@ -58,6 +74,7 @@ const Loader = styled('div')`
 
 const App: React.FC = () => {
   const {isPanelOpen, openPanel, closePanel} = usePanel();
+  const {isPanelOpen: historyPanel, openPanel: openHistory, closePanel: closeHistory} = usePanel();
   const {downloads, requestId}: any = useSelector(songReducerSelector);
   const [reconMessage, setReconMessage] = useState('');
 
@@ -69,7 +86,7 @@ const App: React.FC = () => {
       console.log('cleaning');
       revokeURLs(downloads.cache);
     }
-  }, [requestId]);
+  }, [downloads.cache, requestId]);
 
   return (
     <MainLayout>
@@ -77,8 +94,18 @@ const App: React.FC = () => {
       {requestId ? (
         <Fragment>
           <Header>
-            <Avatar bgUrl={avatarUrl} onClick={openPanel}/>
+            <div onClick={openHistory}>
+              <HistoryIcon/>
+            </div>
+            <div css={css`flex: 1; text-align: center`}>
+              <Logo>YmP</Logo>
+            </div>
+            <div onClick={openPanel}>
+              <ConfigIcon/>
+            </div>
           </Header>
+          <Panel isPanelOpen={historyPanel} handleClose={closeHistory} orientation="left" title="History">
+          </Panel>
           <Panel isPanelOpen={isPanelOpen} handleClose={closePanel} orientation="right" title="Settings">
             <Settings/>
           </Panel>

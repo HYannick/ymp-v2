@@ -7,9 +7,13 @@ export const globalStyles = css`
   body {
    font-size: 1.4rem; 
    font-family: 'Dosis', sans-serif;
+   -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-overflow-scrolling: touch;
   }
   button {
     padding: 0;
+    user-select: none;
   }
   * {
     box-sizing: border-box;

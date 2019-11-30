@@ -219,7 +219,7 @@ export const DownloadListItem: React.FC<ListItemProps> = ({item: {id, thumbnail,
         dispatch(addToCompleted(song, src))
       }
     })
-  }, [src]);
+  });
 
   return (
     <div>

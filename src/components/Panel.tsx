@@ -1,9 +1,7 @@
 /** @jsx jsx */
 import React from 'react';
 import styled from "@emotion/styled";
-import avatarUrl from "../static/avatar-1.png";
 import {css, jsx} from "@emotion/core";
-import CloseIcon from "../core/svg/CloseIcon";
 
 export const Avatar = styled('button')<{ bgUrl: string }>`
   display: block;

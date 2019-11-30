@@ -25,7 +25,6 @@ const Wrapper = styled('form')<{ onSubmit: any }>`
   }
   
   input {
-    flex: 1;
     height: 100%;
     border: none;
     background: transparent;
@@ -38,13 +37,15 @@ const Wrapper = styled('form')<{ onSubmit: any }>`
 `;
 
 const Button = styled('button')<{ hasQuery: boolean }>`
-  position: relative;
+  position: absolute;
+  right: 0;
   outline: none;
   border: none;
   background-color: transparent;
   cursor: pointer;
   display: flex;
   width: 6.5rem;
+  height: 100%;
   align-items: center;
   justify-content: center;
   font-size: 2rem;
