@@ -17,19 +17,20 @@ import LoaderCon from "./core/svg/LoaderCon";
 import HistoryIcon from "./core/svg/HistoryIcon";
 import ConfigIcon from "./core/svg/ConfigIcon";
 
+import logo from "static/logo.png";
 
 
-export const Logo = styled('div')`
-  font-size: 5rem;
-  font-weight: bold;
-  text-align: center;
+export const Logo = styled('img')`
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
   transform: translateY(1rem);
 `;
 
 const Header = styled('div')`
   width: 100%;
   display: flex;
-  padding: 2rem;
+  padding: 0 2rem;
   align-items: center;
   svg {
     width: 3rem;
@@ -98,7 +99,7 @@ const App: React.FC = () => {
               <HistoryIcon/>
             </div>
             <div css={css`flex: 1; text-align: center`}>
-              <Logo>YmP</Logo>
+              <Logo src={logo}/>
             </div>
             <div onClick={openPanel}>
               <ConfigIcon/>

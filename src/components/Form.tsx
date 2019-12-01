@@ -9,6 +9,7 @@ import {useDispatch} from "react-redux";
 const Wrapper = styled('form')<{ onSubmit: any }>`
   height: 15rem;
   padding: 0 2rem;
+  margin-top: 6rem;
   p {
     font-size: 2 rem;
     text-align: center;

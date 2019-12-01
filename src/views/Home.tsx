@@ -14,7 +14,7 @@ import {socket} from "socket";
 import Panel from "components/Panel";
 import DownloadList from "./DownloadList";
 import usePanel from "hooks/panel.hooks";
-import React from "react";
+import React, { Fragment } from "react";
 
 export const Avatar = styled('button')<{ bgUrl: string }>`
   display: block;
@@ -57,8 +57,7 @@ const Home: React.FC = () => {
 
   useGetSongList(searchQuery, dispatch);
   return (
-    <div>
-
+    <Fragment>
       <Form/>
       <div css={css`flex: 1; padding: 0 2rem`}>
         <List items={songList} itemTemplate={ListItem} onItemClick={initDownload}>
@@ -75,7 +74,7 @@ const Home: React.FC = () => {
       <Panel isPanelOpen={isPanelOpen} handleClose={closePanel} orientation="bottom" title="Pending downloads">
         <DownloadList downloadList={downloads.pending} onClose={closePanel} />
       </Panel>
-    </div>
+    </Fragment>
   );
 };
 
