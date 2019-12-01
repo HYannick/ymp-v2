@@ -6,7 +6,7 @@ export const globalStyles = css`
   }
   body {
    font-size: 1.4rem; 
-   font-family: 'Dosis', sans-serif;
+   font-family: monospace, sans-serif;
    -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-overflow-scrolling: touch;

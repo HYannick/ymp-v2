@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from "react";
 import styled from "@emotion/styled";
 import {transparentize} from "polished";
@@ -81,6 +82,7 @@ const DownloadCard: any = styled('div')<{ onClick: any }>`
 DownloadCard.Content = styled('div')`
   flex: 1;
   margin: 0 1rem;
+  position: relative;
 `;
 
 DownloadCard.Thumbnail = styled('div')<{ bgUrl: string }>`
@@ -92,7 +94,7 @@ DownloadCard.Thumbnail = styled('div')<{ bgUrl: string }>`
   box-shadow: 0 0.3rem 0.5rem #b3b3b3;
 `;
 
-DownloadCard.Header = styled('div')`
+DownloadCard.Header = styled('div')<{converting: boolean}>`
   display: flex;
   justify-content: space-between;
   .title {
@@ -100,6 +102,14 @@ DownloadCard.Header = styled('div')`
     max-width: 16rem; 
     overflow: hidden;
     text-overflow: ellipsis; 
+    opacity: ${({converting}) => converting ? 0.2 : 1};
+    transition: opacity 0.3s;
+  }
+  .progress {
+    position: absolute;
+    right: 0;
+    background: white;
+    padding-left: 1rem;
   }
   > h5 {
     font-size: 1.5rem;
@@ -206,9 +216,7 @@ export const DownloadListItem: React.FC<ListItemProps> = ({item: {id, thumbnail,
         setConverting(true)
       }
     });
-  });
 
-  useEffect(() => {
     socket.on('done', (song: any) => {
       if (matchSong(song)) {
         const src = generateDownloadLink(song);
@@ -219,16 +227,16 @@ export const DownloadListItem: React.FC<ListItemProps> = ({item: {id, thumbnail,
         dispatch(addToCompleted(song, src))
       }
     })
-  });
+  }, []);
 
   return (
     <div>
       <DownloadCard onClick={onItemSelected}>
         <DownloadCard.Thumbnail bgUrl={thumbnail}/>
         <DownloadCard.Content>
-          <DownloadCard.Header>
+          <DownloadCard.Header converting={converting}>
             <h5 className="title">{title}</h5>
-            <h5>{converting ? 'Converting...' : `${(progress || 0)}%`}</h5>
+            <h5 className="progress">{converting ? 'Converting...' : `${(progress || 0)}%`}</h5>
           </DownloadCard.Header>
           <DownloadCard.ProgressBar progress={progress}>
             <div/>

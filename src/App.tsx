@@ -81,7 +81,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (!requestId) {
-      setTimeout(() => setReconMessage('Unable to connect :(...Try to reopen the app!'), 8000);
+      setTimeout(() => setReconMessage('Unable to connect :(...Try to reopen the app!'), 15000);
     }
     return function cleanCache() {
       console.log('cleaning');
