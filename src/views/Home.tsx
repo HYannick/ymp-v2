@@ -29,10 +29,10 @@ export const Avatar = styled('button')<{ bgUrl: string }>`
 
 const Footer: any = styled('div')<{ bgUrl: string }>`
   position: relative;
-  height: 33rem;
-  background: ${({bgUrl}) => `url(${bgUrl}) -15rem top no-repeat`};
-  background-size: auto 100%;
-  opacity: 0.2;
+  height: 20rem;
+  background: ${({bgUrl}) => `url(${bgUrl}) bottom left no-repeat`};
+  background-size: 70%;
+  opacity: 0.4;
 `;
 
 const HelperText = styled('p')`
