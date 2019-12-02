@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from "react";
 import styled from "@emotion/styled";
-import {transparentize} from "polished";
 import localForage from 'localforage';
+import {transparentize} from "polished";
 import {socket} from "socket";
 import {useDispatch, useSelector} from "react-redux";
 import {requestIdSelector} from "reducers/song.reducer";
@@ -92,7 +92,7 @@ DownloadCard.Thumbnail = styled('div')<{ bgUrl: string }>`
   border-radius: 2rem;
   background: ${({bgUrl}) => `url(${bgUrl}) center center no-repeat`};
   background-size: cover;
-  box-shadow: 0 0.3rem 0.5rem #b3b3b3;
+  box-shadow: ${({theme}: any) => theme.thumbnailShadow};
 `;
 
 DownloadCard.Header = styled('div')<{converting: boolean}>`
@@ -109,7 +109,7 @@ DownloadCard.Header = styled('div')<{converting: boolean}>`
   .progress {
     position: absolute;
     right: 0;
-    background: white;
+    background: ${({theme}: any) => theme.background};
     padding-left: 1rem;
   }
   > h5 {
@@ -139,7 +139,7 @@ const SongStatus = styled('div')`
   width: 4rem;
   height: 4rem;
   a {
-    background-color: ${({theme}: any) => theme.background};
+    background-color: ${({theme}: any) => theme.body};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -171,7 +171,7 @@ const SongStatus = styled('div')`
      width: 2rem;
      height: 2rem;
      fill: none;
-     stroke: ${({theme}: any) => theme.body};
+     stroke: ${({theme}: any) => theme.background};
     }
   }
 `;
@@ -208,8 +208,8 @@ export const DownloadListItem: React.FC<ListItemProps> = ({item: {id, thumbnail,
   const saveToCompleted = async (song: any) => {
     const savedSongs: any[] = await localForage.getItem('songs') || [];
     const storage = [...savedSongs, song];
-    if(storage.length > 10) storage.splice(-1,1);
-    await localForage.setItem('songs', [...savedSongs, song]);
+    if(storage.length > 30) storage.shift();
+    await localForage.setItem('songs', storage);
   };
 
   useEffect(() => {
@@ -233,7 +233,7 @@ export const DownloadListItem: React.FC<ListItemProps> = ({item: {id, thumbnail,
         setSrc(src);
         setPending(false);
         dispatch(addToCompleted(song, src));
-        await saveToCompleted({title: song.title, thumbnail})
+        await saveToCompleted({id: song.id, title: song.title, thumbnail})
       }
     })
   }, []);

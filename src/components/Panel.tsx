@@ -142,7 +142,6 @@ export const CloseButton = styled('button')<{ isOpen: boolean, orientation: stri
 `;
 
 Wrapper.Content = styled.div<{ isOpen: boolean, orientation: string }>`
-  padding: 1rem;
   position: fixed;
   z-index: 3000;
   ${({isOpen, orientation}) => makeOrientation(isOpen, orientation)};
@@ -153,12 +152,13 @@ Wrapper.Content = styled.div<{ isOpen: boolean, orientation: string }>`
 `;
 
 Wrapper.Title = styled('h4')`
-  padding: 1rem 3rem 0;
   margin: 0;
   font-size: 2rem;
-  display: block;
   width: 100%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
 `;
 
 const Panel: React.FC<{ title?: string, handleClose?: any, isPanelOpen: boolean, orientation?: string }> = ({title, children, isPanelOpen, handleClose, orientation = 'right'}) => {
@@ -170,7 +170,7 @@ const Panel: React.FC<{ title?: string, handleClose?: any, isPanelOpen: boolean,
     <Wrapper isOpen={isPanelOpen}>
       <Wrapper.Overlay {...panelProps} onClick={handleClose}/>
       <Wrapper.Content {...panelProps}>
-        <div css={css`position: relative`}>
+        <div css={css`position: relative; height: 100%;`}>
           {/*<CloseButton {...panelProps} onClick={handleClose}><CloseIcon/></CloseButton>*/}
           <Wrapper.Title>{title}</Wrapper.Title>
           {children}

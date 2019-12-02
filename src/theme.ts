@@ -1,8 +1,8 @@
-import {transparentize} from "polished";
+import {darken, transparentize} from "polished";
 
 const genericTheme = {
   cubicEase: 'cubic-bezier(0.8, 0, 0.2, 1)',
-  success: '#BAFFC0',
+
   error: '#FFBABA',
 };
 const lightTheme = {
@@ -10,14 +10,18 @@ const lightTheme = {
   background: '#fff',
   body: '#333',
   borderColor: '#333',
-  boxShadow: `0 0 1rem ${transparentize(0.8, '#525252')}`
+  boxShadow: `0 0 1rem ${transparentize(0.8, '#525252')}`,
+  thumbnailShadow: '0 0.3rem 0.5rem #b3b3b3',
+  success: '#BAFFC0',
 };
 const darkTheme = {
   ...genericTheme,
   background: '#333',
-  body: '#F5F5F5',
+  body: darken(0.2, '#fff'),
   borderColor: '#F5F5F5',
-  boxShadow: `0 0 1rem ${transparentize(0.8, '#525252')}`
+  boxShadow: `0 0 1rem ${transparentize(0.8, '#525252')}`,
+  thumbnailShadow: 'none',
+  success: '#333',
 };
 const theme = (mode: string) => (mode === 'dark' ? darkTheme : lightTheme);
 

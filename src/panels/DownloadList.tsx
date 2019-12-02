@@ -9,7 +9,9 @@ import DownloadIcon from "core/svg/Download";
 import {resetDownloadList} from "../actions/app.actions";
 
 const Wrapper = styled('div')`
-  padding: 0 1rem;
+  padding: 0 2rem;
+  height: calc(100% - 10rem);
+  overflow-y: scroll;
 `;
 
 const CancelButton = styled('button')`
@@ -54,11 +56,6 @@ const DownloadList: React.FC<{ onClose?: any, downloadList: any[] }> = ({onClose
   const dispatch = useDispatch();
   return (
     <Wrapper>
-      <div css={css`display: flex; position: relative; justify-content: flex-end; margin-bottom: 2rem`}>
-        <CancelButton disabled={!downloadList.length} onClick={() => dispatch(resetDownloadList())}>
-          Cancel all
-        </CancelButton>
-      </div>
       <List items={downloadList} itemTemplate={DownloadListItem}>
         <HelperText>
           <DownloadIcon/>

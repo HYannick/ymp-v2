@@ -7,7 +7,6 @@ import localForage from 'localforage';
 import Home from 'views/Home';
 import {globalStyles} from "./global-styles";
 import styled from "@emotion/styled";
-import Settings from "./components/Settings";
 import Panel from "./components/Panel";
 import usePanel from "./hooks/panel.hooks";
 import {useDispatch, useSelector} from "react-redux";
@@ -20,6 +19,8 @@ import ConfigIcon from "./core/svg/ConfigIcon";
 import logo from "static/logo.png";
 import List from "./components/List/List";
 import {setCompletedDownloadList} from "./actions/app.actions";
+import Settings from 'panels/Settings';
+import HistoryList from "./panels/HistoryList";
 
 
 export const Logo = styled('img')`
@@ -74,18 +75,7 @@ const Loader = styled('div')`
   }
 `;
 
-const HistoryListItem = ({item: {title, thumbnail}}: any) => (
-  <div css={css`display: flex; align-items: center; margin-bottom: 1rem;`}>
-    <img src={thumbnail} alt={title} css={css`
-        object-fit: cover; 
-        width: 5rem; 
-        height: 3rem;
-        border-radius: 2rem;
-        margin-right: 1rem;
-        `}/>
-    <h5 css={css`flex: 1; margin: 0`}>{title}</h5>
-  </div>
-);
+
 
 const App: React.FC = () => {
   const {isPanelOpen, openPanel, closePanel} = usePanel();
@@ -94,12 +84,21 @@ const App: React.FC = () => {
   const dispatch = useDispatch();
   const [reconMessage, setReconMessage] = useState('');
 
+
   useEffect(() => {
     if (!requestId) {
       setTimeout(() => setReconMessage('Unable to connect :(...Try to reopen the app!'), 15000);
     }
 
-    localForage.getItem('songs').then((songs: any) => dispatch(setCompletedDownloadList(songs)));
+    const setDownloadHistory = async() => {
+      const history: any[] = await localForage.getItem('songs');
+      if(history) {
+        return dispatch(setCompletedDownloadList(history))
+      }
+      return []
+    };
+
+    setDownloadHistory();
 
     return function cleanCache() {
       console.log('cleaning');
@@ -124,12 +123,7 @@ const App: React.FC = () => {
             </div>
           </Header>
           <Panel isPanelOpen={historyPanel} handleClose={closeHistory} orientation="left" title="History">
-            <div css={css`margin-top: 2rem;`}>
-              <List items={downloads.completed} itemTemplate={HistoryListItem}
-                    onItemClick={() => console.log('clicked')}>
-                <p>No history.</p>
-              </List>
-            </div>
+            <HistoryList history={downloads.completed}/>
           </Panel>
           <Panel isPanelOpen={isPanelOpen} handleClose={closePanel} orientation="right" title="Settings">
             <Settings/>

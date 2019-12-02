@@ -20,7 +20,7 @@ const Wrapper = styled('form')<{ onSubmit: any }>`
     height: 6rem;
     width: 100%;
     border-radius: 2rem 2rem 5rem 5rem;
-    border: 0.4rem solid ${({theme}: any) => theme.borderColor};
+    border: 0.4rem solid ${({theme}: any) => theme.body};
     overflow: hidden;
     position: relative;
   }
@@ -30,6 +30,7 @@ const Wrapper = styled('form')<{ onSubmit: any }>`
     border: none;
     background: transparent;
     outline: white;
+    color: ${({theme}: any) => theme.body};
     padding-left: 2rem;
     padding-right: 4rem;
     font-weight: bold;

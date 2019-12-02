@@ -12,9 +12,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {ListItem} from "components/List/SongListItem";
 import {socket} from "socket";
 import Panel from "components/Panel";
-import DownloadList from "./DownloadList";
 import usePanel from "hooks/panel.hooks";
 import React, { Fragment } from "react";
+import DownloadList from "../panels/DownloadList";
 
 export const Avatar = styled('button')<{ bgUrl: string }>`
   display: block;
