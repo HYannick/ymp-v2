@@ -35,7 +35,7 @@ const Footer: any = styled('div')<{ bgUrl: string }>`
   opacity: 0.4;
 `;
 
-const HelperText = styled('p')`
+export const HelperText = styled('p')`
    width: 100%;
    padding: 0 2rem;
    text-align: center;

@@ -3,12 +3,16 @@ import React from 'react';
 import {css, jsx} from "@emotion/core";
 import {useTheme} from "../ThemeProvider";
 import styled from "@emotion/styled";
+import Exposure from "../core/svg/Exposure";
+import Moon from "../core/svg/Moon";
+import FRFlag from "../core/svg/FRFlag";
+import UKFlag from "../core/svg/UKFlag";
 
 interface OptionTypes {
   id: string | number,
   name: string,
-  media?: any,
-  action: any
+  icon?: any,
+  action: any,
 }
 
 interface SettingsTypes {
@@ -28,28 +32,37 @@ const OptionContainer = styled('div')`
     display: flex;
     flex-wrap: nowrap;
   }
-  button {
-    width: 6rem;
-    height: 6rem;
-    background-color: ${({theme}: any) => theme.body};
-    color: ${({theme}: any) => theme.background};
-    border-radius: 1rem;
-    box-shadow: 0 0.5rem 1rem rgba(82,82,82,0.2);
-    margin-right: 1rem;
-    border: none;
-    outline: white;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    
-  }
 `;
+
+const OptionButton = styled('button')`
+{
+  width: 6rem;
+  height: 6rem;
+  background-color: ${({theme}: any) => theme.body};
+  color: ${({theme}: any) => theme.background};
+  border-radius: 2.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(82,82,82,0.2);
+  margin-right: 1rem;
+  border: none;
+  outline: white;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  svg {
+    width: 3rem;
+    height: 3rem;
+    path {
+      ${({theme, withColor}: any) => !withColor ? `fill: ${theme.background}` : ''};
+    }
+  }
+}
+`
 
 const Option: React.FC<SettingsTypes> = ({label, options}) => {
   return (
     <OptionContainer>
       <h4>{label}</h4>
       <div>
-        {options.map(opt => <button key={opt.id} onClick={opt.action}>{opt.name}</button>)}
+        {options.map(({id, action, icon: {cmp: Icon, props}}) => <OptionButton key={id} onClick={action} {...props}><Icon /></OptionButton>)}
       </div>
     </OptionContainer>
   )
@@ -70,7 +83,8 @@ const Settings: React.FC = () => {
         {
           id: 1,
           name: themeState.dark ? 'light-theme' : 'dark-theme',
-          action: themeState.toggle
+          action: themeState.toggle,
+          icon: {cmp: themeState.dark ? Exposure : Moon, props: {withColor: false}}
         }
       ]
     },
@@ -81,12 +95,14 @@ const Settings: React.FC = () => {
         {
           id: 1,
           name: 'french',
-          action: () => setLang('french')
+          action: () => setLang('french'),
+          icon: {cmp: FRFlag, props: {withColor: true}}
         },
         {
           id: 2,
           name: 'english',
-          action: () => setLang('english')
+          action: () => setLang('english'),
+          icon: {cmp: UKFlag, props: {withColor: true}}
         }
       ]
     }

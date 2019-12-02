@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from "react";
 import styled from "@emotion/styled";
 import {transparentize} from "polished";
+import localForage from 'localforage';
 import {socket} from "socket";
 import {useDispatch, useSelector} from "react-redux";
 import {requestIdSelector} from "reducers/song.reducer";
@@ -204,6 +205,13 @@ export const DownloadListItem: React.FC<ListItemProps> = ({item: {id, thumbnail,
   const dispatch = useDispatch();
   const matchSong = (eventStatus: any) => eventStatus.requestId === requestId && eventStatus.videoId === id;
 
+  const saveToCompleted = async (song: any) => {
+    const savedSongs: any[] = await localForage.getItem('songs') || [];
+    const storage = [...savedSongs, song];
+    if(storage.length > 10) storage.splice(-1,1);
+    await localForage.setItem('songs', [...savedSongs, song]);
+  };
+
   useEffect(() => {
     socket.on('progress', (status: any) => {
       if (matchSong(status)) {
@@ -217,14 +225,15 @@ export const DownloadListItem: React.FC<ListItemProps> = ({item: {id, thumbnail,
       }
     });
 
-    socket.on('done', (song: any) => {
+    socket.on('done', async (song: any) => {
       if (matchSong(song)) {
         const src = generateDownloadLink(song);
         setConverting(false);
         setProgress(100);
         setSrc(src);
         setPending(false);
-        dispatch(addToCompleted(song, src))
+        dispatch(addToCompleted(song, src));
+        await saveToCompleted({title: song.title, thumbnail})
       }
     })
   }, []);

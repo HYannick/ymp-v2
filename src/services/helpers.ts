@@ -6,6 +6,7 @@ export const generateDownloadLink = (data: any) => {
 };
 
 export const revokeURLs = (sources: string[]) => {
+  if(!sources.length) return;
   sources.forEach(src => {
     URL.revokeObjectURL(src);
   })

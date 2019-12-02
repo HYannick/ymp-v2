@@ -31,6 +31,10 @@ export const addToCompleted = (item: DownloadItemTypes, src: string) => ({
   src
 });
 
+export const setCompletedDownloadList = (list: any[]) => ({
+  type: ActionTypes.SET_DOWNLOAD_COMPLETE_LIST,
+  list
+});
 export const setSearch = (query: string) => ({
   type: ActionTypes.SET_SEARCH,
   query

@@ -102,6 +102,9 @@ export const songReducer = (state = initialState, action: any) => {
     case ActionTypes.RESET_DOWNLOAD_LIST: {
       return {...state, downloads: {pending: [], completed: []}};
     }
+    case ActionTypes.SET_DOWNLOAD_COMPLETE_LIST: {
+      return {...state, downloads: {pending: [], completed: action.list}};
+    }
     default: {
       return state;
     }
