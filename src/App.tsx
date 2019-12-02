@@ -3,8 +3,8 @@ import React, {useEffect, Fragment, useState} from 'react';
 import './App.css';
 
 import {css, Global, jsx} from "@emotion/core";
-
-import Home, {HelperText} from 'views/Home';
+import localForage from 'localforage';
+import Home from 'views/Home';
 import {globalStyles} from "./global-styles";
 import styled from "@emotion/styled";
 import Settings from "./components/Settings";
@@ -19,7 +19,6 @@ import ConfigIcon from "./core/svg/ConfigIcon";
 
 import logo from "static/logo.png";
 import List from "./components/List/List";
-import localForage from 'localforage';
 import {setCompletedDownloadList} from "./actions/app.actions";
 
 

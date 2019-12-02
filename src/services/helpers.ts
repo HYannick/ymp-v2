@@ -5,7 +5,7 @@ export const generateDownloadLink = (data: any) => {
   return URL.createObjectURL(blob);
 };
 
-export const revokeURLs = (sources: string[]) => {
+export const revokeURLs = (sources: string[] = []) => {
   if(!sources.length) return;
   sources.forEach(src => {
     URL.revokeObjectURL(src);
