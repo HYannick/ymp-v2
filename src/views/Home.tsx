@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import {css, jsx} from "@emotion/core";
+import uuid from 'uuid/v4'
 import Form from "components/Form";
 import List from "components/List/List";
 import bgFooter from "static/bg-footer.png";
@@ -9,23 +10,14 @@ import {useGetSongList} from "hooks/use-get-song-list.hook";
 import {songReducerSelector} from "reducers/song.reducer";
 import {addDownloadItem} from "../actions/app.actions";
 import {useDispatch, useSelector} from "react-redux";
-import {ListItem} from "components/List/SongListItem";
+import {ListItem} from "components/List/ListItems";
 import {socket} from "socket";
 import Panel from "components/Panel";
 import usePanel from "hooks/panel.hooks";
 import React, { Fragment } from "react";
-import DownloadList from "../panels/DownloadList";
-
-export const Avatar = styled('button')<{ bgUrl: string }>`
-  display: block;
-  cursor: pointer;
-  border: none;
-  outline: white;
-  width: 6rem;
-  height: 6rem;
-  background: ${({bgUrl}) => `url(${bgUrl}) center center no-repeat`};
-  background-size: cover;
-`;
+import DownloadList from "panels/DownloadList";
+import {useTranslation} from "react-i18next";
+import {lighten} from "polished";
 
 const Footer: any = styled('div')<{ bgUrl: string }>`
   position: relative;
@@ -39,20 +31,21 @@ export const HelperText = styled('p')`
    width: 100%;
    padding: 0 2rem;
    text-align: center;
-   font-size: 2rem;
+   font-size: 1.5rem;
    font-weight: bold;
-   color: ${({theme}: any) => theme.body};
+   color: ${({theme}: any) => lighten(0.3, theme.body)};
 
 `;
 
 const Home: React.FC = () => {
+  const {t} = useTranslation();
   const {songList, searchQuery, downloads}: any = useSelector(songReducerSelector);
   const {isPanelOpen, openPanel, closePanel} = usePanel();
   const dispatch = useDispatch();
 
   const initDownload = (item: any) => {
     socket.emit('start_dl', item.link);
-    dispatch(addDownloadItem(item));
+    dispatch(addDownloadItem({...item, id: uuid()}));
   };
 
   useGetSongList(searchQuery, dispatch);
@@ -62,16 +55,15 @@ const Home: React.FC = () => {
       <div css={css`flex: 1; padding: 0 2rem`}>
         <List items={songList} itemTemplate={ListItem} onItemClick={initDownload}>
           <HelperText>
-            Fill your youtube link
-            And let me convert it.
-            <br/>
-            If you like the song, support the artist, subscribe, like, buy and share ;)
+            {t('list.helper_text')}
+            <br />
+            {t('list.support_text')}
           </HelperText>
         </List>
       </div>
       <Footer bgUrl={bgFooter}/>
       <DownloadButtonLink downloadCount={downloads.pendingCount} onClick={openPanel}/>
-      <Panel isPanelOpen={isPanelOpen} handleClose={closePanel} orientation="bottom" title="Pending downloads">
+      <Panel isPanelOpen={isPanelOpen} handleClose={closePanel} orientation="bottom" title={t('downloads.title')}>
         <DownloadList downloadList={downloads.pending} onClose={closePanel} />
       </Panel>
     </Fragment>

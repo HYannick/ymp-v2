@@ -9,17 +9,20 @@
     "@types/node": "12.12.11",
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.4",
+    "@types/uuid": "^3.4.6",
     "emotion-theming": "^10.0.19",
     "localforage": "^1.7.3",
     "polished": "^3.4.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-i18next": "^11.2.5",
     "react-redux": "^7.1.3",
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
     "reselect": "^4.0.0",
     "socket.io-client": "^2.3.0",
     "typescript": "3.7.2",
+    "uuid": "^3.3.3",
     "youtube-search": "^1.1.4"
   },
   "scripts": {
@@ -47,6 +50,7 @@
     "@testing-library/react": "^9.3.2",
     "@types/react-redux": "^7.1.5",
     "@types/socket.io-client": "^1.4.32",
-    "babel-plugin-emotion": "^10.0.23"
+    "babel-plugin-emotion": "^10.0.23",
+    "i18next": "^19.0.1"
   }
 }

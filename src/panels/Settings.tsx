@@ -7,6 +7,7 @@ import Exposure from "../core/svg/Exposure";
 import Moon from "../core/svg/Moon";
 import FRFlag from "../core/svg/FRFlag";
 import UKFlag from "../core/svg/UKFlag";
+  import {useTranslation} from "react-i18next";
 
 interface OptionTypes {
   id: string | number,
@@ -55,7 +56,7 @@ const OptionButton = styled('button')`
     }
   }
 }
-`
+`;
 
 const Option: React.FC<SettingsTypes> = ({label, options}) => {
   return (
@@ -69,16 +70,18 @@ const Option: React.FC<SettingsTypes> = ({label, options}) => {
 };
 
 const Settings: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const themeState = useTheme();
 
-  const setLang = (lang: string) => {
-    console.log('lang', lang)
+  const setLang = async (lang: string) => {
+    await i18n.changeLanguage(lang);
+    window.localStorage.setItem('lang', lang);
   };
 
   const settings: SettingsTypes[] = [
     {
       id: 'dark-mode',
-      label: 'Dark Theme',
+      label: t('settings.theme'),
       options: [
         {
           id: 1,
@@ -90,18 +93,18 @@ const Settings: React.FC = () => {
     },
     {
       id: 'lang',
-      label: 'Language',
+      label: t('settings.lang'),
       options: [
         {
           id: 1,
           name: 'french',
-          action: () => setLang('french'),
+          action: () => setLang('fr'),
           icon: {cmp: FRFlag, props: {withColor: true}}
         },
         {
           id: 2,
           name: 'english',
-          action: () => setLang('english'),
+          action: () => setLang('en'),
           icon: {cmp: UKFlag, props: {withColor: true}}
         }
       ]

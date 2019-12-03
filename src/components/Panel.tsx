@@ -3,16 +3,6 @@ import React from 'react';
 import styled from "@emotion/styled";
 import {css, jsx} from "@emotion/core";
 
-export const Avatar = styled('button')<{ bgUrl: string }>`
-  display: block;
-  cursor: pointer;
-  border: none;
-  outline: white;
-  width: 6rem;
-  height: 6rem;
-  background: ${({bgUrl}) => `url(${bgUrl}) center center no-repeat`};
-  background-size: cover;
-`;
 const Wrapper: any = styled.div<{ isOpen: boolean }>`
   height: 100vh;
   visibility: ${({isOpen}) => isOpen ? 'visible' : 'hidden'};
@@ -82,65 +72,6 @@ const makeOrientation = (isOpen: boolean, orientation: string) => {
   }
 };
 
-const makeCloseOrientation = (isOpen: boolean, orientation: string) => {
-  switch (orientation) {
-    case 'top':
-      return css`
-        top: 0;
-        left: 50%;
-        transform: ${isOpen ? 'translate3d(-50%, 0, 0) scale(1)' : 'translate3d(-50%, 0,0) scale(0)'};
-      `;
-    case 'bottom':
-      return css`
-        top: -4.5rem;
-        left: 50%;
-        transform: ${isOpen ? 'translate3d(-50%, 0, 0) scale(1)' : 'translate3d(-50%, 0, 0) scale(0)'};
-      `;
-    case 'left':
-      return css`
-        top: 3rem;
-        right: -3.5rem;
-        transform: ${isOpen ? 'translate3d(0, -50%, 0) scale(1)' : 'translate3d(0, -50%, 0) scale(0)'};
-      `;
-    case 'right':
-      return css`
-        top: 3rem;
-        left: -3.5rem;
-        transform: ${isOpen ? 'translate3d(0,-50%, 0) scale(1)' : 'translate3d(0,-50%, 0) scale(0)'};
-      `;
-    default:
-      return css`
-        top: 50%;
-        right: -3.5rem;
-        transform: ${isOpen ? 'translate3d(0,-50%, 0) scale(1)' : 'translate3d(0,-50%, 0) scale(0)'};
-      `;
-  }
-}
-
-export const CloseButton = styled('button')<{ isOpen: boolean, orientation: string }>`
-  position: absolute;
-  width: 5rem;
-  height: 5rem;
-  border: none;
-  font-weight: bold;
-  box-shadow: ${({theme}: any) => theme.boxShadow};
-   ${({isOpen, orientation}) => makeCloseOrientation(isOpen, orientation)};
-  border-radius: 4rem;
-  background-color: ${({theme}: any) => theme.body};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s 0.1s;
-  outline: white;
-  svg {
-    width: 2rem;
-    height: 2rem;
-    path {
-      stroke: ${({theme}: any) => theme.background};
-    }
-  }
-`;
-
 Wrapper.Content = styled.div<{ isOpen: boolean, orientation: string }>`
   position: fixed;
   z-index: 3000;
@@ -161,7 +92,22 @@ Wrapper.Title = styled('h4')`
   height: 4rem;
 `;
 
-const Panel: React.FC<{ title?: string, handleClose?: any, isPanelOpen: boolean, orientation?: string }> = ({title, children, isPanelOpen, handleClose, orientation = 'right'}) => {
+interface PanelTypes {
+  title?: string,
+  handleClose?: any,
+  isPanelOpen: boolean,
+  orientation?: string
+}
+
+const Panel: React.FC<PanelTypes> = (props) => {
+  const {
+    title,
+    children,
+    isPanelOpen,
+    handleClose,
+    orientation = 'right'
+  } = props;
+
   const panelProps = {
     isOpen: isPanelOpen,
     orientation
@@ -171,13 +117,12 @@ const Panel: React.FC<{ title?: string, handleClose?: any, isPanelOpen: boolean,
       <Wrapper.Overlay {...panelProps} onClick={handleClose}/>
       <Wrapper.Content {...panelProps}>
         <div css={css`position: relative; height: 100%;`}>
-          {/*<CloseButton {...panelProps} onClick={handleClose}><CloseIcon/></CloseButton>*/}
           <Wrapper.Title>{title}</Wrapper.Title>
           {children}
         </div>
       </Wrapper.Content>
     </Wrapper>
   );
-}
+};
 
 export default Panel;

@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import {ThemeProvider} from "./ThemeProvider";
+import 'index.css';
+import App from 'app/App';
+import * as serviceWorker from 'serviceWorker';
+import {ThemeProvider} from "ThemeProvider";
 import {Provider} from "react-redux";
 import store from "store";
-import {initSocketCon, socket} from "./socket";
+import {initSocketCon, socket} from "socket";
+import './i18n';
 initSocketCon(socket, store);
 
 ReactDOM.render(

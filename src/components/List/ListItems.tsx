@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from "react";
 import styled from "@emotion/styled";
-import localForage from 'localforage';
 import {transparentize} from "polished";
 import {socket} from "socket";
 import {useDispatch, useSelector} from "react-redux";
 import {requestIdSelector} from "reducers/song.reducer";
 import {generateDownloadLink} from "services/helpers";
 import {addToCompleted} from "actions/app.actions";
-import DownloadLink from "../../core/svg/DownloadLink";
-import Spinner from "../../core/svg/Spinner";
+import DownloadLink from "core/svg/DownloadLink";
+import Spinner from "core/svg/Spinner";
+import SongAPI from "services/song.api";
+import {useTranslation} from "react-i18next";
 
 const Card = styled('div')`
   width: 100%;
@@ -64,14 +65,6 @@ const Card = styled('div')`
   }
 `;
 
-interface DownloadCardProps {
-  Header: any,
-  Title: any,
-  ProgressBar: any,
-  Thumbnail: any,
-  Content: any
-}
-
 const DownloadCard: any = styled('div')<{ onClick: any }>`
   margin-bottom: 1rem;
   display: flex;
@@ -95,7 +88,7 @@ DownloadCard.Thumbnail = styled('div')<{ bgUrl: string }>`
   box-shadow: ${({theme}: any) => theme.thumbnailShadow};
 `;
 
-DownloadCard.Header = styled('div')<{converting: boolean}>`
+DownloadCard.Header = styled('div')<{ converting: boolean }>`
   display: flex;
   justify-content: space-between;
   .title {
@@ -173,12 +166,12 @@ const SongStatus = styled('div')`
      fill: none;
      stroke: ${({theme}: any) => theme.background};
     }
-  }
-`;
+  }`;
 
 export interface ListItemProps {
   item: {
-    id: string | number,
+    id: string,
+    videoId: string | number,
     thumbnail: string
     title: string,
     link: string,
@@ -196,76 +189,91 @@ export const ListItem: React.FC<ListItemProps> = ({item: {thumbnail, title}, onI
   )
 };
 
-export const DownloadListItem: React.FC<ListItemProps> = ({item: {id, thumbnail, title}, onItemSelected}) => {
-  const requestId = useSelector(requestIdSelector);
-  const [src, setSrc] = useState('');
-  const [pending, setPending] = useState(true);
-  const [converting, setConverting] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const dispatch = useDispatch();
-  const matchSong = (eventStatus: any) => eventStatus.requestId === requestId && eventStatus.videoId === id;
+export const HistoryListItem = ({item: {title, thumbnail}}: {item: {title: string, thumbnail: string}}) => {
+  const Card = styled('div')`
+    display: flex; 
+    align-items: center;
+    margin-bottom: 1rem;
+    img {
+      object-fit: cover; 
+      width: 5rem; 
+      height: 3rem;
+      border-radius: 2rem;
+      margin-right: 1rem;
+    }
+    p {
+      flex: 1; 
+      margin: 0;
+    }
+  `;
 
-  const saveToCompleted = async (song: any) => {
-    const savedSongs: any[] = await localForage.getItem('songs') || [];
-    const storage = [...savedSongs, song];
-    if(storage.length > 30) storage.shift();
-    await localForage.setItem('songs', storage);
-  };
+  return (
+    <Card>
+      <img src={thumbnail} alt={title}/>
+      <p>{title}</p>
+    </Card>
+  );
+};
+
+
+export const DownloadListItem: React.FC<ListItemProps> = ({item: {videoId, thumbnail, title}, onItemSelected}) => {
+  const requestId = useSelector(requestIdSelector);
+  const dispatch = useDispatch();
+  const {t} = useTranslation();
+  const [{src, pending, converting, progress}, setState] = useState({
+    src: '',
+    pending: true,
+    converting: false,
+    progress: 0
+  });
+
+  const matchSong = (eventStatus: any) => eventStatus.requestId === requestId && eventStatus.videoId === videoId;
 
   useEffect(() => {
     socket.on('progress', (status: any) => {
       if (matchSong(status)) {
-        setProgress(+status.progress)
+        setState((state) => ({...state, progress: +status.progress}));
       }
     });
 
     socket.on('converting', (status: any) => {
       if (matchSong(status)) {
-        setConverting(true)
+        setState((state) => ({...state, converting: true}));
       }
     });
 
     socket.on('done', async (song: any) => {
       if (matchSong(song)) {
-        const src = generateDownloadLink(song);
-        setConverting(false);
-        setProgress(100);
-        setSrc(src);
-        setPending(false);
-        dispatch(addToCompleted(song, src));
-        await saveToCompleted({id: song.id, title: song.title, thumbnail})
+        const src: string = generateDownloadLink(song);
+        const completedSong = {
+          id: song.id,
+          title: song.title,
+          thumbnail
+        };
+        setState((state) => ({...state, converting: false, progress: 100, src, pending: false}));
+        dispatch(addToCompleted(completedSong, src));
+        await SongAPI.updateSongHistory(completedSong)
       }
     })
   }, []);
 
   return (
-    <div>
-      <DownloadCard onClick={onItemSelected}>
-        <DownloadCard.Thumbnail bgUrl={thumbnail}/>
-        <DownloadCard.Content>
-          <DownloadCard.Header converting={converting}>
-            <h5 className="title">{title}</h5>
-            <h5 className="progress">{converting ? 'Converting...' : `${(progress || 0)}%`}</h5>
-          </DownloadCard.Header>
-          <DownloadCard.ProgressBar progress={progress}>
-            <div/>
-          </DownloadCard.ProgressBar>
-        </DownloadCard.Content>
-        <SongStatus>
-          <a href={src || undefined} download={title} aria-disabled={pending}>
-            {
-              pending ? (
-                  <Spinner/>
-                ) :
-                (
-                  <DownloadLink/>
-                )
-            }
-          </a>
-        </SongStatus>
-
-      </DownloadCard>
-
-    </div>
+    <DownloadCard onClick={onItemSelected}>
+      <DownloadCard.Thumbnail bgUrl={thumbnail}/>
+      <DownloadCard.Content>
+        <DownloadCard.Header converting={converting}>
+          <h5 className="title">{title}</h5>
+          <h5 className="progress">{converting ? t('downloads.convert') : `${(progress || 0)}%`}</h5>
+        </DownloadCard.Header>
+        <DownloadCard.ProgressBar progress={progress}>
+          <div/>
+        </DownloadCard.ProgressBar>
+      </DownloadCard.Content>
+      <SongStatus>
+        <a href={src || undefined} download={title} aria-disabled={pending}>
+          {pending ? (<Spinner/>) : (<DownloadLink/>)}
+        </a>
+      </SongStatus>
+    </DownloadCard>
   )
-}
+};

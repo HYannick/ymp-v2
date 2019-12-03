@@ -1,0 +1,24 @@
+{
+  "search": {
+    "intro": "Alors on convertit quoi ?",
+    "placeholder": "ID Video, nom, lien YT..."
+  },
+  "downloads": {
+    "title": "Téléchargements en cours",
+    "convert": "Conversion...",
+    "no_dl": "Aucun téléchargement en cours",
+    "redirect": "Va chercher du son! ;)"
+  },
+  "history": {
+    "title": "Historique"
+  },
+  "settings": {
+    "title": "Config",
+    "theme": "Theme sombre",
+    "lang": "Langage"
+  },
+  "list": {
+    "helper_text": "Insère ton lien Youtube et laisse moi le convertir.",
+    "support_text": "Si tu aimes ton son, supportes l'artiste, abonnes-toi, aime, achète et partage ;)"
+  }
+}

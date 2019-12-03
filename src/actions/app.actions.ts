@@ -1,4 +1,5 @@
 import {ActionTypes, DownloadItemTypes, SongItemProps} from "./app.actions.types";
+import {HistoryListItemTypes} from "../app/App";
 
 export const setRequestId = (id: string) => ({
   type: ActionTypes.SET_REQUEST_ID,
@@ -31,7 +32,7 @@ export const addToCompleted = (item: DownloadItemTypes, src: string) => ({
   src
 });
 
-export const setCompletedDownloadList = (list: any[]) => ({
+export const setCompletedDownloadList = (list: HistoryListItemTypes[]) => ({
   type: ActionTypes.SET_DOWNLOAD_COMPLETE_LIST,
   list
 });

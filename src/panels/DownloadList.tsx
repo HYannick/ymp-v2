@@ -1,24 +1,16 @@
 /** @jsx jsx */
 import React from 'react';
 import List from "components/List/List";
-import {useDispatch} from "react-redux";
-import {DownloadListItem} from "components/List/SongListItem";
-import {css, jsx} from "@emotion/core";
+import {DownloadListItem} from "components/List/ListItems";
+import {jsx} from "@emotion/core";
 import styled from '@emotion/styled';
 import DownloadIcon from "core/svg/Download";
-import {resetDownloadList} from "../actions/app.actions";
+import {useTranslation} from "react-i18next";
 
 const Wrapper = styled('div')`
   padding: 0 2rem;
   height: calc(100% - 10rem);
   overflow-y: scroll;
-`;
-
-const CancelButton = styled('button')`
-  border: 0.2rem solid  ${({theme}: any) => theme.body};
-  background-color: transparent;
-  border-radius: 1rem;
-  padding: 1rem 2rem;
 `;
 
 const HelperText = styled('div')`
@@ -53,14 +45,14 @@ const HelperText = styled('div')`
 
 
 const DownloadList: React.FC<{ onClose?: any, downloadList: any[] }> = ({onClose, downloadList}) => {
-  const dispatch = useDispatch();
+  const {t} = useTranslation();
   return (
     <Wrapper>
       <List items={downloadList} itemTemplate={DownloadListItem}>
         <HelperText>
           <DownloadIcon/>
-          <h4>No pending downloads!</h4>
-          <button onClick={onClose}>Go search some songs! ;)</button>
+          <h4>{t('downloads.no_dl')}</h4>
+          <button onClick={onClose}>{t('downloads.redirect')}</button>
         </HelperText>
       </List>
     </Wrapper>

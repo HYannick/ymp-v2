@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {ListItemProps} from "./SongListItem";
+import {ListItemProps} from "./ListItems";
 
 interface ListProps {
   items: any[],

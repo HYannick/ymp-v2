@@ -2,9 +2,9 @@ import {darken, transparentize} from "polished";
 
 const genericTheme = {
   cubicEase: 'cubic-bezier(0.8, 0, 0.2, 1)',
-
   error: '#FFBABA',
 };
+
 const lightTheme = {
   ...genericTheme,
   background: '#fff',
@@ -23,6 +23,7 @@ const darkTheme = {
   thumbnailShadow: 'none',
   success: '#333',
 };
+
 const theme = (mode: string) => (mode === 'dark' ? darkTheme : lightTheme);
 
 export default theme

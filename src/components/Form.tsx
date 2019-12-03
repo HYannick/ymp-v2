@@ -5,6 +5,7 @@ import {resetSongList, setSearch} from "actions/app.actions";
 import {transitions} from "polished";
 import CloseIcon from 'core/svg/CloseIcon';
 import {useDispatch} from "react-redux";
+import {useTranslation} from "react-i18next";
 
 const Wrapper = styled('form')<{ onSubmit: any }>`
   height: 15rem;
@@ -99,9 +100,12 @@ const EmptyInputButton = styled('button')<{ hasQuery: boolean }>`
   }
 `;
 const Form: React.FC = () => {
+  const {t} = useTranslation();
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
+
   const handleChange = (e: any) => setQuery(e.target.value);
+
   const submitSearch = (e: any) => {
     e.preventDefault();
     dispatch(setSearch(query));
@@ -109,15 +113,17 @@ const Form: React.FC = () => {
       dispatch(resetSongList());
     }
   };
+
   const resetSearch = () => {
     setQuery('');
     dispatch(setSearch(''));
   };
+
   return (
     <Wrapper onSubmit={submitSearch}>
-      <p>What can I convert for you?</p>
+      <p>{t('search.intro')}</p>
       <div>
-        <input type="text" value={query} placeholder="Video ID, Song name..." onChange={handleChange}/>
+        <input type="text" value={query} placeholder={t('search.placeholder')} onChange={handleChange}/>
         <EmptyInputButton type="reset" onClick={resetSearch} hasQuery={query.length !== 0}>
           <CloseIcon/>
         </EmptyInputButton>

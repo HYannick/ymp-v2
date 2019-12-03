@@ -1,0 +1,25 @@
+{
+  "search": {
+    "intro": "What can I convert for you?",
+    "placeholder": "Video ID, Song name..."
+  },
+  "downloads": {
+    "title": "Pending downloads",
+    "convert": "Converting...",
+    "no_dl": "No pending downloads!",
+    "redirect": "Go search some songs! ;)"
+  },
+  "history": {
+    "title": "History",
+    "no_history": "No history."
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": "Dark Theme",
+    "lang": "Language"
+  },
+  "list": {
+    "helper_text": "Fill your youtube link And let me convert it.",
+    "support_text": "If you like the song, support the artist, subscribe, like, buy and share ;)"
+  }
+}
