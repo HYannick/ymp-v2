@@ -9,7 +9,7 @@ import {useTranslation} from "react-i18next";
 
 const Wrapper = styled('div')`
   padding: 0 2rem;
-  height: calc(100% - 10rem);
+  height: calc(100% - 12rem);
   overflow-y: scroll;
 `;
 

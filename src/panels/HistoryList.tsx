@@ -1,14 +1,19 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import List from "components/List/List";
 import styled from '@emotion/styled';
 import {HistoryListItemTypes} from "app/App";
 import {HistoryListItem} from "components/List/ListItems";
+import Button from "../components/Button";
+import SongAPI from "../services/song.api";
+import {useDispatch} from "react-redux";
+import {resetCompletedDownloads} from "../actions/app.actions";
+import {useTranslation} from "react-i18next";
 
 const Wrapper = styled('div')`
-  margin-top: 2rem;
   padding: 0 1rem;
   overflow-y: scroll;
-  height: calc(100% - 10rem);
+  height: calc(100% - 6rem);
+  padding-bottom: 6rem;
 `;
 
 const HelperText = styled('p')`
@@ -16,13 +21,30 @@ const HelperText = styled('p')`
   margin-top: 20rem;
 `;
 
+const ButtonWithRadius = styled(Button)`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 2rem 2rem 0 0;
+`;
+
 const HistoryList: React.FC<{ history: HistoryListItemTypes[] }> = ({history}) => {
+  const dispatch = useDispatch();
+  const {t} = useTranslation();
+  const cleanHistory = async () => {
+    dispatch(resetCompletedDownloads());
+    await SongAPI.clearSongHistory();
+  };
   return (
-    <Wrapper>
-      <List items={history} itemTemplate={HistoryListItem}>
-        <HelperText>No history.</HelperText>
-      </List>
-    </Wrapper>
+    <Fragment>
+      <Wrapper>
+        <List items={history} itemTemplate={HistoryListItem}>
+          <HelperText>{t('history.no_history')}</HelperText>
+        </List>
+      </Wrapper>
+      <ButtonWithRadius onClick={cleanHistory}>{t('history.clear')}</ButtonWithRadius>
+    </Fragment>
   );
 };
 

@@ -4,6 +4,7 @@ import {songReducerSelector} from "reducers/song.reducer";
 import LoaderCon from "core/svg/LoaderCon";
 import {css} from "@emotion/core";
 import styled from "@emotion/styled";
+import {useTranslation} from "react-i18next";
 
 
 export const Loader = styled('div')`
@@ -26,21 +27,22 @@ export const Loader = styled('div')`
 const WithRequestId: React.FC = ({children}) => {
   const {requestId}: any = useSelector(songReducerSelector);
   const [reconMessage, setReconMessage] = useState('');
+  const {t} = useTranslation();
 
   useEffect(() => {
     if (!requestId) {
-      setTimeout(() => setReconMessage('Unable to connect :(...Try to reopen the app!'), 15000);
+      setTimeout(() => setReconMessage(t('loading.failed_connexion')), 15000);
     }
-    return function cleanup () {
+    return function cleanup() {
       setReconMessage('')
     }
   });
 
-  if(!requestId) {
+  if (!requestId) {
     return (
       <Loader>
         <LoaderCon/>
-        Connecting...
+        {t('loading.connexion')}
         <span css={css`text-align: center;padding: 4rem;`}>{reconMessage}</span>
       </Loader>
     )

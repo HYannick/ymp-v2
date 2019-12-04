@@ -53,3 +53,8 @@ export const resetDownloadList = () => ({
   type: ActionTypes.RESET_DOWNLOAD_LIST,
 });
 
+export const resetCompletedDownloads = () => ({
+  type: ActionTypes.RESET_COMPLETED_DOWNLOADS,
+});
+
+

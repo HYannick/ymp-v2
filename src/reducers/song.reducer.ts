@@ -96,10 +96,13 @@ export const songReducer = (state: any = initialState, action: any) => {
       return {...state, songList: []};
     }
     case ActionTypes.RESET_DOWNLOAD_LIST: {
-      return {...state, downloads: {pending: [], completed: [], pendingCount: 0, cache: []}};
+      return {...state, downloads: {pending: [], pendingCount: 0, cache: []}};
     }
     case ActionTypes.SET_DOWNLOAD_COMPLETE_LIST: {
       return {...state, downloads: {...state.downloads, completed: action.list}};
+    }
+    case ActionTypes.RESET_COMPLETED_DOWNLOADS: {
+      return {...state, downloads: {...state.downloads, completed: []}};
     }
     default: {
       return state;

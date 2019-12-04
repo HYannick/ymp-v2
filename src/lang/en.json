@@ -1,4 +1,8 @@
 {
+  "loading": {
+    "connexion": "Connecting...",
+    "failed_connexion": "Unable to connect :(...Try to reopen the app!"
+  },
   "search": {
     "intro": "What can I convert for you?",
     "placeholder": "Video ID, Song name..."
@@ -11,7 +15,8 @@
   },
   "history": {
     "title": "History",
-    "no_history": "No history."
+    "no_history": "No history.",
+    "clear": "Clear History"
   },
   "settings": {
     "title": "Settings",

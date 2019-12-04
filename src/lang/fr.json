@@ -1,16 +1,22 @@
 {
+  "loading": {
+    "connexion": "Connexion...",
+    "failed_connexion": "Connexion impossible :(...Essaie d'actualiser l'application !"
+  },
   "search": {
     "intro": "Alors on convertit quoi ?",
-    "placeholder": "ID Video, nom, lien YT..."
+    "placeholder": "Nom, lien YT, ID..."
   },
   "downloads": {
     "title": "Téléchargements en cours",
     "convert": "Conversion...",
     "no_dl": "Aucun téléchargement en cours",
-    "redirect": "Va chercher du son! ;)"
+    "redirect": "Vas chercher du son! ;)"
   },
   "history": {
-    "title": "Historique"
+    "title": "Historique",
+    "no_history": "Aucun historique.",
+    "clear": "Effacer l'historique"
   },
   "settings": {
     "title": "Config",

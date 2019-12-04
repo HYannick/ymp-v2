@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from "@emotion/styled";
 import {css, jsx} from "@emotion/core";
+import {transparentize} from "polished";
 
 const Wrapper: any = styled.div<{ isOpen: boolean }>`
   height: 100vh;
@@ -89,7 +90,17 @@ Wrapper.Title = styled('h4')`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 4rem;
+  height: 6rem;
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    right: 0;
+    height: 0.5rem;
+    background: linear-gradient(to bottom, ${({theme}: any) => `${theme.background}, ${transparentize(1, theme.background)}`});
+  }
 `;
 
 interface PanelTypes {

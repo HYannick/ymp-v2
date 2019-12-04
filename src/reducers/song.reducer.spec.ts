@@ -251,6 +251,72 @@ describe('songReducer', () => {
       },
     });
   });
+
+  it('should reset completed download list to []', () => {
+    const state = {
+      ...initialState,
+      downloads: {
+        pending: [
+          {
+            id: 'deo-peao',
+            thumbnail: 'fomh.jpg',
+            title: 'fomh',
+            link: 'yt-fomh.com'
+          },
+          {
+            id: 'ddaeo-pveao',
+            thumbnail: 'anapurna.jpg',
+            title: 'anapurna',
+            link: 'yt-anapurna.com'
+          }
+        ],
+        completed: [
+          {
+            id: 'deo-peao',
+            thumbnail: 'fomh.jpg',
+            title: 'fomh',
+            link: 'yt-fomh.com'
+          },
+          {
+            id: 'ddaeo-pveao',
+            thumbnail: 'anapurna.jpg',
+            title: 'anapurna',
+            link: 'yt-anapurna.com'
+          }
+        ],
+        pendingCount: 0,
+        cache: []
+      }
+    };
+    expect(songReducer(state, {
+      type: ActionTypes.RESET_COMPLETED_DOWNLOADS,
+    })).toEqual({
+      requestId: null,
+      loading: false,
+      searchQuery: '',
+      errors: null,
+      songList: [],
+      downloads: {
+        pending: [
+          {
+            id: 'deo-peao',
+            thumbnail: 'fomh.jpg',
+            title: 'fomh',
+            link: 'yt-fomh.com'
+          },
+          {
+            id: 'ddaeo-pveao',
+            thumbnail: 'anapurna.jpg',
+            title: 'anapurna',
+            link: 'yt-anapurna.com'
+          }
+        ],
+        completed: [],
+        pendingCount: 0,
+        cache: []
+      },
+    });
+  });
 });
 
 

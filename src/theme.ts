@@ -13,6 +13,11 @@ const lightTheme = {
   boxShadow: `0 0 1rem ${transparentize(0.8, '#525252')}`,
   thumbnailShadow: '0 0.3rem 0.5rem #b3b3b3',
   success: '#BAFFC0',
+  palette: {
+    primary:  '#BAFFC0',
+    danger: '#FFBABA',
+    dark: '#333',
+  }
 };
 const darkTheme = {
   ...genericTheme,

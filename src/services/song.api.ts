@@ -17,4 +17,7 @@ export default class SongAPI {
     const storage = [...savedSongs, song];
     return localForage.setItem('songs', storage.length > 30 ? [...storage.shift()] : storage);
   }
+  static async clearSongHistory() {
+    return await localForage.removeItem('songs');
+  }
 }
