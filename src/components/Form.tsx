@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {FormEvent, useState} from 'react'
 import styled from "@emotion/styled";
 import SearchIcon from "core/svg/Search";
 import {resetSongList, setSearch} from "actions/app.actions";
@@ -7,7 +7,7 @@ import CloseIcon from 'core/svg/CloseIcon';
 import {useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 
-const Wrapper = styled('form')<{ onSubmit: any }>`
+const Wrapper = styled('form')<{ onSubmit: (event: FormEvent) => void }>`
   height: 15rem;
   padding: 0 2rem;
   margin-top: 6rem;

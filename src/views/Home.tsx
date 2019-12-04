@@ -7,7 +7,7 @@ import bgFooter from "static/bg-footer.png";
 import DownloadButtonLink from "components/DownloadButtonLink";
 import styled from "@emotion/styled";
 import {useGetSongList} from "hooks/use-get-song-list.hook";
-import {songReducerSelector} from "reducers/song.reducer";
+import {IStateProps, songReducerSelector} from "reducers/song.reducer";
 import {addDownloadItem} from "../actions/app.actions";
 import {useDispatch, useSelector} from "react-redux";
 import {ListItem} from "components/List/ListItems";
@@ -39,7 +39,7 @@ export const HelperText = styled('p')`
 
 const Home: React.FC = () => {
   const {t} = useTranslation();
-  const {songList, searchQuery, downloads}: any = useSelector(songReducerSelector);
+  const {songList, searchQuery, downloads}: IStateProps = useSelector(songReducerSelector);
   const {isPanelOpen, openPanel, closePanel} = usePanel();
   const dispatch = useDispatch();
 
@@ -49,6 +49,7 @@ const Home: React.FC = () => {
   };
 
   useGetSongList(searchQuery, dispatch);
+
   return (
     <Fragment>
       <Form/>

@@ -44,7 +44,7 @@ const HelperText = styled('div')`
 `;
 
 
-const DownloadList: React.FC<{ onClose?: any, downloadList: any[] }> = ({onClose, downloadList}) => {
+const DownloadList: React.FC<{ onClose?: () => void, downloadList: any[] }> = ({onClose, downloadList}) => {
   const {t} = useTranslation();
   return (
     <Wrapper>

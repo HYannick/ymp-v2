@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styled from "@emotion/styled";
 import {transparentize} from "polished";
 import {socket} from "socket";
@@ -189,7 +189,7 @@ export const ListItem: React.FC<ListItemProps> = ({item: {thumbnail, title}, onI
   )
 };
 
-export const HistoryListItem = ({item: {title, thumbnail}}: {item: {title: string, thumbnail: string}}) => {
+export const HistoryListItem = ({item: {title, thumbnail}}: { item: { title: string, thumbnail: string } }) => {
   const Card = styled('div')`
     display: flex; 
     align-items: center;
@@ -215,9 +215,18 @@ export const HistoryListItem = ({item: {title, thumbnail}}: {item: {title: strin
   );
 };
 
+interface matchSongType {
+  requestId: string | null,
+  videoId: string | number
+}
+
+export const matchSong = (data: matchSongType, song: matchSongType) => (
+  data.requestId === song.requestId && data.videoId === song.videoId
+);
 
 export const DownloadListItem: React.FC<ListItemProps> = ({item: {videoId, thumbnail, title}, onItemSelected}) => {
   const requestId = useSelector(requestIdSelector);
+  const itemRef = useRef<HTMLAnchorElement>(null);
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const [{src, pending, converting, progress}, setState] = useState({
@@ -227,30 +236,32 @@ export const DownloadListItem: React.FC<ListItemProps> = ({item: {videoId, thumb
     progress: 0
   });
 
-  const matchSong = (eventStatus: any) => eventStatus.requestId === requestId && eventStatus.videoId === videoId;
 
   useEffect(() => {
-    socket.on('progress', (status: any) => {
-      if (matchSong(status)) {
-        setState((state) => ({...state, progress: +status.progress}));
+    socket.on('progress', (data: any) => {
+      if (matchSong(data, {requestId, videoId})) {
+        setState((state) => ({...state, progress: +data.progress}));
       }
     });
 
-    socket.on('converting', (status: any) => {
-      if (matchSong(status)) {
+    socket.on('converting', (data: any) => {
+      if (matchSong(data, {requestId, videoId})) {
         setState((state) => ({...state, converting: true}));
       }
     });
 
-    socket.on('done', async (song: any) => {
-      if (matchSong(song)) {
-        const src: string = generateDownloadLink(song);
+    socket.on('done', async (data: any) => {
+      if (matchSong(data, {requestId, videoId})) {
+        const src: string = generateDownloadLink(data);
         const completedSong = {
-          id: song.id,
-          title: song.title,
+          id: data.id,
+          title: data.title,
           thumbnail
         };
         setState((state) => ({...state, converting: false, progress: 100, src, pending: false}));
+        if(itemRef && itemRef.current) {
+          itemRef.current.click();
+        }
         dispatch(addToCompleted(completedSong, src));
         await SongAPI.updateSongHistory(completedSong)
       }
@@ -270,7 +281,7 @@ export const DownloadListItem: React.FC<ListItemProps> = ({item: {videoId, thumb
         </DownloadCard.ProgressBar>
       </DownloadCard.Content>
       <SongStatus>
-        <a href={src || undefined} download={title} aria-disabled={pending}>
+        <a href={src || undefined} download={title} aria-disabled={pending} ref={itemRef}>
           {pending ? (<Spinner/>) : (<DownloadLink/>)}
         </a>
       </SongStatus>

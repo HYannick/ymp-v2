@@ -15,6 +15,8 @@ describe('songReducer', () => {
       downloads: {
         pending: [],
         completed: [],
+        pendingCount: 0,
+        cache: []
       },
     })
   });
@@ -32,6 +34,8 @@ describe('songReducer', () => {
       downloads: {
         pending: [],
         completed: [],
+        pendingCount: 0,
+        cache: []
       },
     })
   });
@@ -49,6 +53,8 @@ describe('songReducer', () => {
       downloads: {
         pending: [],
         completed: [],
+        pendingCount: 0,
+        cache: []
       },
     })
   });
@@ -93,11 +99,13 @@ describe('songReducer', () => {
       downloads: {
         pending: [],
         completed: [],
+        pendingCount: 0,
+        cache: []
       }
     });
   });
 
-  it('should append downloadItem to downloads', () => {
+  it('should append downloadItem to downloads and increment pending count', () => {
     const state = {
       ...initialState,
       downloads: {
@@ -109,7 +117,9 @@ describe('songReducer', () => {
             link: 'yt-anapurna.com'
           }
         ],
-        completed: []
+        completed: [],
+        pendingCount: 0,
+        cache: []
       },
     };
     expect(songReducer(state, {
@@ -142,6 +152,8 @@ describe('songReducer', () => {
           }
         ],
         completed: [],
+        pendingCount: 1,
+        cache: []
       },
     });
   });
@@ -158,7 +170,9 @@ describe('songReducer', () => {
       songList: [],
       downloads: {
         pending: [],
-        completed: []
+        completed: [],
+        pendingCount: 0,
+        cache: []
       }
     });
   });
@@ -191,7 +205,9 @@ describe('songReducer', () => {
       songList: [],
       downloads: {
         pending: [],
-        completed: []
+        completed: [],
+        pendingCount: 0,
+        cache: []
       },
     });
   });
@@ -214,7 +230,9 @@ describe('songReducer', () => {
             link: 'yt-anapurna.com'
           }
         ],
-        completed: []
+        completed: [],
+        pendingCount: 0,
+        cache: []
       }
     };
     expect(songReducer(state, {
@@ -227,7 +245,9 @@ describe('songReducer', () => {
       songList: [],
       downloads: {
         pending: [],
-        completed: []
+        completed: [],
+        pendingCount: 0,
+        cache: []
       },
     });
   });

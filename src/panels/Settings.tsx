@@ -13,7 +13,7 @@ interface OptionTypes {
   id: string | number,
   name: string,
   icon?: any,
-  action: any,
+  action: () => void,
 }
 
 interface SettingsTypes {

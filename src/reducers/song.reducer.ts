@@ -4,15 +4,15 @@ import {createSelector} from "reselect";
 export interface SongProps {
   id: string
   thumbnail: string,
-  title:string,
+  title: string,
   link: string,
 }
 
 export interface CompletedSongProps {
-  success:string,
-  requestId:string,
-  videoId:string,
-  title:string,
+  success: string,
+  requestId: string,
+  videoId: string,
+  title: string,
   blob: Blob
 }
 
@@ -25,16 +25,12 @@ export interface IStateProps {
     pending: SongProps[],
     completed: CompletedSongProps[],
     pendingCount: number,
-    cache: []
+    cache: string[]
   },
   errors: null,
 }
 
-export interface IAction {
-  type: ActionTypes;
-}
-
-export const initialState: any = {
+export const initialState: IStateProps = {
   requestId: null,
   loading: false,
   searchQuery: '',
@@ -48,7 +44,7 @@ export const initialState: any = {
   errors: null
 };
 
-export const songReducerSelector = (state: {songReducer: IStateProps}) => state.songReducer;
+export const songReducerSelector = (state: { songReducer: IStateProps }) => state.songReducer;
 
 export const requestIdSelector = createSelector(
   [songReducerSelector],
@@ -60,7 +56,7 @@ export const downloadsSelector = createSelector(
   songReducer => songReducer.downloads
 );
 
-export const songReducer = (state = initialState, action: any) => {
+export const songReducer = (state: any = initialState, action: any) => {
   const {pending, completed, pendingCount, cache} = state.downloads;
   switch (action.type) {
     case ActionTypes.SET_REQUEST_ID: {
@@ -100,7 +96,7 @@ export const songReducer = (state = initialState, action: any) => {
       return {...state, songList: []};
     }
     case ActionTypes.RESET_DOWNLOAD_LIST: {
-      return {...state, downloads: {pending: [], completed: []}};
+      return {...state, downloads: {pending: [], completed: [], pendingCount: 0, cache: []}};
     }
     case ActionTypes.SET_DOWNLOAD_COMPLETE_LIST: {
       return {...state, downloads: {...state.downloads, completed: action.list}};

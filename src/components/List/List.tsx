@@ -3,7 +3,7 @@ import {ListItemProps} from "./ListItems";
 
 interface ListProps {
   items: any[],
-  onItemClick?: Function,
+  onItemClick?: (item: object) => void,
   itemTemplate: React.FC<ListItemProps>
 }
 
