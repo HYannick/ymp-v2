@@ -33,7 +33,7 @@ export const HelperText = styled('p')`
    text-align: center;
    font-size: 1.5rem;
    font-weight: bold;
-   color: ${({theme}: any) => lighten(0.3, theme.body)};
+   color: ${({theme}) => lighten(0.3, theme.body)};
 
 `;
 

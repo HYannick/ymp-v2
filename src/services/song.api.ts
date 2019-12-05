@@ -1,5 +1,6 @@
 import ytSearch from 'youtube-search'
 import localForage from 'localforage';
+import {HistoryListItemTypes} from "../app/App";
 
 export default class SongAPI {
   static getSongList(query: string, maxResults: number) {
@@ -12,9 +13,9 @@ export default class SongAPI {
     return ytSearch(query, options);
   }
 
-  static async updateSongHistory(song: any) {
-    const savedSongs: any = await localForage.getItem('songs') || [];
-    const storage = [...savedSongs, song];
+  static async updateSongHistory(song: HistoryListItemTypes) {
+    const savedSongs: HistoryListItemTypes[] = await localForage.getItem('songs') || [];
+    const storage: any[] = [...savedSongs, song];
     return localForage.setItem('songs', storage.length > 30 ? [...storage.shift()] : storage);
   }
   static async clearSongHistory() {

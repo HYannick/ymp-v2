@@ -17,14 +17,14 @@ export const Header = styled('div')`
     width: 3rem;
     height: 3rem;
     path {
-      fill: ${({theme}: any) => theme.body}
+      fill: ${({theme}) => theme.body}
     }
   }
 `;
 
 export const MainLayout = styled('div')`
-  background-color: ${({theme}: any) => theme.background};
-  color:${({theme}: any) => theme.body}; ;
+  background-color: ${({theme}) => theme.background};
+  color:${({theme}) => theme.body}; ;
   transition: all 0.3s ease;
   min-height: 100vh;
   display: flex;

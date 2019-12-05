@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from "@emotion/styled";
 
-const StyledButton = styled('button')<{ onClick: any, variant?: string }>`
+const StyledButton = styled('button')<{ onClick: () => void, variant?: string }>`
   position: relative;
   border: none;
-  background-color: ${({variant, theme}: any) => variant ? theme.palette[variant] : theme.body};
-  color: ${({theme}: any) => theme.background};
+  background-color: ${({variant, theme}) => variant ? theme.palette[variant] : theme.body};
+  color: ${({theme}) => theme.background};
   padding: 1rem 2rem;
   width: 100%;
   font-size: 1.6rem;

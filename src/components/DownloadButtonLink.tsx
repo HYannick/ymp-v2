@@ -11,8 +11,8 @@ const DownloadButton: any = styled('div')`
   width: 8rem;
   height: 8rem;
   border: none;
-  background-color:  ${({theme}: any) => theme.body};
-  color:  ${({theme}: any) => theme.background};
+  background-color:  ${({theme}) => theme.body};
+  color:  ${({theme}) => theme.background};
   border-radius: 3rem;
   outline: white;
   transition: background-color 0.3s;
@@ -24,14 +24,14 @@ const DownloadButton: any = styled('div')`
     width: 100%;
     height: 100%;
     border-radius: 3rem;
-    box-shadow: ${({theme}: any) => theme.boxShadow};
+    box-shadow: ${({theme}) => theme.boxShadow};
   }
   svg {
     width: 4rem;
     height: 4rem;
     & > g {
       fill: none;
-      stroke: ${({theme}: any) => theme.background};
+      stroke: ${({theme}) => theme.background};
       transition: stroke 0.3s;
     }
   }
@@ -41,9 +41,9 @@ DownloadButton.Chip = styled('span')`
   position: absolute;
   top: -1.5rem;
   right: -1.5rem;
-  border: 0.8rem solid ${({theme}: any) => theme.body};
-  background-color: ${({theme}: any) => theme.success};
-  color: ${({theme}: any) => theme.body};
+  border: 0.8rem solid ${({theme}) => theme.body};
+  background-color: ${({theme}) => theme.success};
+  color: ${({theme}) => theme.body};
   border-radius: 2rem;
   width: 4rem;
   height: 4rem;
@@ -54,7 +54,7 @@ DownloadButton.Chip = styled('span')`
   font-weight: bold;
 `;
 
-const DownloadButtonLink: React.FC<{downloadCount: number, onClick: any}> = ({downloadCount, onClick}) => {
+const DownloadButtonLink: React.FC<{downloadCount: number, onClick: () => void}> = ({downloadCount, onClick}) => {
   return (
     <DownloadButton onClick={onClick}>
       <div>

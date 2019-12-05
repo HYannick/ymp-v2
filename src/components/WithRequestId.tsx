@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {songReducerSelector} from "reducers/song.reducer";
+import {IStateProps, songReducerSelector} from "reducers/song.reducer";
 import LoaderCon from "core/svg/LoaderCon";
 import {css} from "@emotion/core";
 import styled from "@emotion/styled";
@@ -18,14 +18,14 @@ export const Loader = styled('div')`
   svg {
     width: 9rem;
     height: 9rem;
-    stroke: ${({theme}: any) => theme.body};
+    stroke: ${({theme}) => theme.body};
     margin-bottom: 1.5rem;
   }
 `;
 
 
 const WithRequestId: React.FC = ({children}) => {
-  const {requestId}: any = useSelector(songReducerSelector);
+  const {requestId}: IStateProps = useSelector(songReducerSelector);
   const [reconMessage, setReconMessage] = useState('');
   const {t} = useTranslation();
 

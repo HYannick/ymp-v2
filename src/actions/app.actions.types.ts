@@ -17,7 +17,8 @@ export interface SongItemProps {
   id: string | number,
   thumbnail: string,
   title: string,
-  link: string
+  link: string,
+  videoId?: string
 }
 
 export interface DownloadItemTypes {

@@ -1,4 +1,4 @@
-  /** @jsx jsx */
+/** @jsx jsx */
 import React from 'react';
 import {css, jsx} from "@emotion/core";
 import {useTheme} from "../ThemeProvider";
@@ -7,12 +7,15 @@ import Exposure from "../core/svg/Exposure";
 import Moon from "../core/svg/Moon";
 import FRFlag from "../core/svg/FRFlag";
 import UKFlag from "../core/svg/UKFlag";
-  import {useTranslation} from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 interface OptionTypes {
   id: string | number,
   name: string,
-  icon?: any,
+  icon: {
+    component: React.FC,
+    props: any
+  },
   action: () => void,
 }
 
@@ -35,12 +38,12 @@ const OptionContainer = styled('div')`
   }
 `;
 
-const OptionButton = styled('button')`
+const OptionButton = styled('button')<{ withColor: boolean }>`
 {
   width: 6rem;
   height: 6rem;
-  background-color: ${({theme}: any) => theme.body};
-  color: ${({theme}: any) => theme.background};
+  background-color: ${({theme}) => theme.body};
+  color: ${({theme}) => theme.background};
   border-radius: 2.5rem;
   box-shadow: 0 0.5rem 1rem rgba(82,82,82,0.2);
   margin-right: 1rem;
@@ -52,7 +55,7 @@ const OptionButton = styled('button')`
     width: 3rem;
     height: 3rem;
     path {
-      ${({theme, withColor}: any) => !withColor ? `fill: ${theme.background}` : ''};
+      ${({theme, withColor}) => !withColor ? `fill: ${theme.background}` : ''};
     }
   }
 }
@@ -63,14 +66,18 @@ const Option: React.FC<SettingsTypes> = ({label, options}) => {
     <OptionContainer>
       <h4>{label}</h4>
       <div>
-        {options.map(({id, action, icon: {cmp: Icon, props}}) => <OptionButton key={id} onClick={action} {...props}><Icon /></OptionButton>)}
+        {options.map(({id, action, icon: {component: Icon, props}}) => (
+          <OptionButton key={id} onClick={action} {...props}>
+            <Icon/>
+          </OptionButton>
+        ))}
       </div>
     </OptionContainer>
   )
 };
 
 const Settings: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const {t, i18n} = useTranslation();
   const themeState = useTheme();
 
   const setLang = async (lang: string) => {
@@ -87,7 +94,7 @@ const Settings: React.FC = () => {
           id: 1,
           name: themeState.dark ? 'light-theme' : 'dark-theme',
           action: themeState.toggle,
-          icon: {cmp: themeState.dark ? Exposure : Moon, props: {withColor: false}}
+          icon: {component: themeState.dark ? Exposure : Moon, props: {withColor: false}}
         }
       ]
     },
@@ -99,13 +106,13 @@ const Settings: React.FC = () => {
           id: 1,
           name: 'french',
           action: () => setLang('fr'),
-          icon: {cmp: FRFlag, props: {withColor: true}}
+          icon: {component: FRFlag, props: {withColor: true}}
         },
         {
           id: 2,
           name: 'english',
           action: () => setLang('en'),
-          icon: {cmp: UKFlag, props: {withColor: true}}
+          icon: {component: UKFlag, props: {withColor: true}}
         }
       ]
     }

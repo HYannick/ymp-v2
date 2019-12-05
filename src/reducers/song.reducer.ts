@@ -1,19 +1,12 @@
 import {ActionTypes} from "../actions/app.actions.types";
 import {createSelector} from "reselect";
+import {HistoryListItemTypes} from "../app/App";
 
 export interface SongProps {
   id: string
   thumbnail: string,
   title: string,
   link: string,
-}
-
-export interface CompletedSongProps {
-  success: string,
-  requestId: string,
-  videoId: string,
-  title: string,
-  blob: Blob
 }
 
 export interface IStateProps {
@@ -23,7 +16,7 @@ export interface IStateProps {
   songList: SongProps[],
   downloads: {
     pending: SongProps[],
-    completed: CompletedSongProps[],
+    completed: HistoryListItemTypes[],
     pendingCount: number,
     cache: string[]
   },

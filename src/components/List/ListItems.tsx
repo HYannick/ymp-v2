@@ -35,7 +35,7 @@ const Card = styled('div')`
     left:0;
     right:0;
     bottom:0;
-    background: ${({theme}: any) => transparentize(0.8, theme.body)};
+    background: ${({theme}) => transparentize(0.8, theme.body)};
     transform-origin: left;
     transform: scaleX(0);
     opacity: 0.5;
@@ -70,7 +70,7 @@ const DownloadCard: any = styled('div')<{ onClick: any }>`
   display: flex;
   align-items: flex-end;
   padding-bottom: 1rem;
-  border-bottom: 0.1rem solid ${({theme}: any) => transparentize(0.8, theme.body)};
+  border-bottom: 0.1rem solid ${({theme}) => transparentize(0.8, theme.body)};
 `;
 
 DownloadCard.Content = styled('div')`
@@ -85,7 +85,7 @@ DownloadCard.Thumbnail = styled('div')<{ bgUrl: string }>`
   border-radius: 2rem;
   background: ${({bgUrl}) => `url(${bgUrl}) center center no-repeat`};
   background-size: cover;
-  box-shadow: ${({theme}: any) => theme.thumbnailShadow};
+  box-shadow: ${({theme}) => theme.thumbnailShadow};
 `;
 
 DownloadCard.Header = styled('div')<{ converting: boolean }>`
@@ -102,7 +102,7 @@ DownloadCard.Header = styled('div')<{ converting: boolean }>`
   .progress {
     position: absolute;
     right: 0;
-    background: ${({theme}: any) => theme.background};
+    background: ${({theme}) => theme.background};
     padding-left: 1rem;
   }
   > h5 {
@@ -117,13 +117,13 @@ DownloadCard.ProgressBar = styled('div')<{ progress: string | number }>`
   overflow: hidden;
   height: 0.5rem;
   border-radius: 2rem 0.5rem 2rem 0.5rem;
-  border: 0.1rem solid ${({theme}: any) => theme.body};
+  border: 0.1rem solid ${({theme}) => theme.body};
   margin-top: 0.5rem;
   & > div {
     transform: scaleX(${({progress}) => `${+progress / 100}`});
     transform-origin: left;
     height: 100%;
-    background-color: ${({theme}: any) => theme.body};
+    background-color: ${({theme}) => theme.body};
     transition: transform 0.3s;
   }
 `;
@@ -132,7 +132,7 @@ const SongStatus = styled('div')`
   width: 4rem;
   height: 4rem;
   a {
-    background-color: ${({theme}: any) => theme.body};
+    background-color: ${({theme}) => theme.body};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -164,20 +164,20 @@ const SongStatus = styled('div')`
      width: 2rem;
      height: 2rem;
      fill: none;
-     stroke: ${({theme}: any) => theme.background};
+     stroke: ${({theme}) => theme.background};
     }
   }`;
-
+interface ItemProps {
+  id: string,
+  videoId: string | number,
+  thumbnail: string
+  title: string,
+  link: string,
+  progress?: string | number
+}
 export interface ListItemProps {
-  item: {
-    id: string,
-    videoId: string | number,
-    thumbnail: string
-    title: string,
-    link: string,
-    progress?: string | number
-  },
-  onItemSelected: any
+  item: ItemProps,
+  onItemSelected: () => void
 }
 
 export const ListItem: React.FC<ListItemProps> = ({item: {thumbnail, title}, onItemSelected}) => {

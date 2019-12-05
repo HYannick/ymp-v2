@@ -22,7 +22,7 @@ Wrapper.Overlay = styled.div<{ isOpen: boolean }>`
   width: 100%;
   height: 100vh;
   opacity: ${({isOpen}) => isOpen ? '0.5' : '0'};
-  background-color: ${({theme}: any) => theme.background};
+  background-color: ${({theme}) => theme.background};
   transition: opacity 0.3s;
 `;
 
@@ -78,9 +78,9 @@ Wrapper.Content = styled.div<{ isOpen: boolean, orientation: string }>`
   z-index: 3000;
   ${({isOpen, orientation}) => makeOrientation(isOpen, orientation)};
   transition: transform 0.3s ease;
-  background-color: ${({theme}: any) => theme.background};
-  box-shadow: ${({theme}: any) => theme.boxShadow};
-  color: ${({theme}: any) => theme.body};
+  background-color: ${({theme}) => theme.background};
+  box-shadow: ${({theme}) => theme.boxShadow};
+  color: ${({theme}) => theme.body};
 `;
 
 Wrapper.Title = styled('h4')`
@@ -99,7 +99,7 @@ Wrapper.Title = styled('h4')`
     left: 0;
     right: 0;
     height: 0.5rem;
-    background: linear-gradient(to bottom, ${({theme}: any) => `${theme.background}, ${transparentize(1, theme.background)}`});
+    background: linear-gradient(to bottom, ${({theme}) => `${theme.background}, ${transparentize(1, theme.background)}`});
   }
 `;
 

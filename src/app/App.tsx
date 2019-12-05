@@ -21,7 +21,7 @@ import Home from 'views/Home';
 import {revokeURLs} from "services/helpers";
 
 
-import {songReducerSelector} from "reducers/song.reducer";
+import {IStateProps, songReducerSelector} from "reducers/song.reducer";
 import {setCompletedDownloadList} from "actions/app.actions";
 
 
@@ -40,7 +40,7 @@ const App: React.FC = () => {
   const {t} = useTranslation();
   const {isPanelOpen, openPanel, closePanel} = usePanel();
   const {isPanelOpen: historyPanel, openPanel: openHistory, closePanel: closeHistory} = usePanel();
-  const {downloads, requestId}: any = useSelector(songReducerSelector);
+  const {downloads, requestId}: IStateProps = useSelector(songReducerSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {

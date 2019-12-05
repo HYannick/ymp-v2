@@ -30,7 +30,7 @@ export const useDarkMode = () => {
   return [themeState, setThemeState]
 };
 
-export const ThemeProvider = ({children}: any) => {
+export const ThemeProvider: React.FC = ({children}) => {
   const [themeState, setThemeState] = useDarkMode();
   if (!themeState.hasThemeMounted) {
     return <div/>;

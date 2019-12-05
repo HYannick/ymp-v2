@@ -21,7 +21,7 @@ const Wrapper = styled('form')<{ onSubmit: (event: FormEvent) => void }>`
     height: 6rem;
     width: 100%;
     border-radius: 2rem 2rem 5rem 5rem;
-    border: 0.4rem solid ${({theme}: any) => theme.body};
+    border: 0.4rem solid ${({theme}) => theme.body};
     overflow: hidden;
     position: relative;
   }
@@ -31,7 +31,7 @@ const Wrapper = styled('form')<{ onSubmit: (event: FormEvent) => void }>`
     border: none;
     background: transparent;
     outline: white;
-    color: ${({theme}: any) => theme.body};
+    color: ${({theme}) => theme.body};
     padding-left: 2rem;
     padding-right: 4rem;
     font-weight: bold;
@@ -62,18 +62,18 @@ const Button = styled('button')<{ hasQuery: boolean }>`
     right: 0;
     top: 0;
     transform-origin: right;
-    background-color: ${({theme}: any) => theme.body};
+    background-color: ${({theme}) => theme.body};
     transform: ${({hasQuery}) => hasQuery ? 'scaleX(1)' : 'scaleX(0)'};
     opacity: 1;
-    ${({theme}: any) => transitions(['transform'], `0.5s ${theme.cubicEase}`)};
+    ${({theme}) => transitions(['transform'], `0.5s ${theme.cubicEase}`)};
   }
   & > svg {
     width: 2.5rem;
     height: 2.5rem;
     path {
       fill: none;
-      stroke: ${({hasQuery, theme}: any) => hasQuery ? theme.background : theme.body};
-      ${({theme}: any) => transitions(['stroke'], `0.5s ${theme.cubicEase}`)};
+      stroke: ${({hasQuery, theme}) => hasQuery ? theme.background : theme.body};
+      ${({theme}) => transitions(['stroke'], `0.5s ${theme.cubicEase}`)};
     }
   }
 `;
@@ -89,13 +89,13 @@ const EmptyInputButton = styled('button')<{ hasQuery: boolean }>`
   outline: white;
   cursor: pointer;
   opacity: 1;
-  transform: ${({hasQuery}: any) => hasQuery ? 'translateY(0)' : 'translateY(4.5rem)'};
-  ${({theme}: any) => transitions(['transform'], `0.5s ${theme.cubicEase}`)};
+  transform: ${({hasQuery}) => hasQuery ? 'translateY(0)' : 'translateY(4.5rem)'};
+  ${({theme}) => transitions(['transform'], `0.5s ${theme.cubicEase}`)};
   svg {
    width: 2rem;
    height: 2rem;
    path {
-    stroke: ${({theme}: any) => theme.body};
+    stroke: ${({theme}) => theme.body};
    }
   }
 `;
@@ -104,9 +104,9 @@ const Form: React.FC = () => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
 
-  const handleChange = (e: any) => setQuery(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
 
-  const submitSearch = (e: any) => {
+  const submitSearch = (e: React.FormEvent<Element>) => {
     e.preventDefault();
     dispatch(setSearch(query));
     if (!query) {
