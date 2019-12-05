@@ -1,10 +1,10 @@
 {
   "loading": {
     "connexion": "Connexion...",
-    "failed_connexion": "Connexion impossible :(...Essaie d'actualiser l'application !"
+    "failed_connexion": "Connexion impossible :(...Actualise l'application !"
   },
   "search": {
-    "intro": "Alors on convertit quoi ?",
+    "intro": "Alors, on convertit quoi ?",
     "placeholder": "Nom, lien YT, ID..."
   },
   "downloads": {

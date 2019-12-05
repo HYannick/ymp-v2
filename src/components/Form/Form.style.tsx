@@ -1,13 +1,8 @@
-import React, {FormEvent, useState} from 'react'
 import styled from "@emotion/styled";
-import SearchIcon from "core/svg/Search";
-import {resetSongList, setSearch} from "actions/app.actions";
+import {FormEvent} from "react";
 import {transitions} from "polished";
-import CloseIcon from 'core/svg/CloseIcon';
-import {useDispatch} from "react-redux";
-import {useTranslation} from "react-i18next";
 
-const Wrapper = styled('form')<{ onSubmit: (event: FormEvent) => void }>`
+export const Wrapper = styled('form')<{ onSubmit: (event: FormEvent) => void }>`
   height: 15rem;
   padding: 0 2rem;
   margin-top: 6rem;
@@ -39,7 +34,7 @@ const Wrapper = styled('form')<{ onSubmit: (event: FormEvent) => void }>`
   }
 `;
 
-const Button = styled('button')<{ hasQuery: boolean }>`
+export const Button = styled('button')<{ hasQuery: boolean }>`
   position: absolute;
   right: 0;
   outline: none;
@@ -78,7 +73,7 @@ const Button = styled('button')<{ hasQuery: boolean }>`
   }
 `;
 
-const EmptyInputButton = styled('button')<{ hasQuery: boolean }>`
+export const EmptyInputButton = styled('button')<{ hasQuery: boolean }>`
   position: absolute;
   right: 6.5rem;
   top: 0;
@@ -99,40 +94,3 @@ const EmptyInputButton = styled('button')<{ hasQuery: boolean }>`
    }
   }
 `;
-const Form: React.FC = () => {
-  const {t} = useTranslation();
-  const dispatch = useDispatch();
-  const [query, setQuery] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
-
-  const submitSearch = (e: React.FormEvent<Element>) => {
-    e.preventDefault();
-    dispatch(setSearch(query));
-    if (!query) {
-      dispatch(resetSongList());
-    }
-  };
-
-  const resetSearch = () => {
-    setQuery('');
-    dispatch(setSearch(''));
-  };
-
-  return (
-    <Wrapper onSubmit={submitSearch}>
-      <p>{t('search.intro')}</p>
-      <div>
-        <input type="text" value={query} placeholder={t('search.placeholder')} onChange={handleChange}/>
-        <EmptyInputButton type="reset" onClick={resetSearch} hasQuery={query.length !== 0}>
-          <CloseIcon/>
-        </EmptyInputButton>
-        <Button type="submit" hasQuery={query.length !== 0}>
-          <SearchIcon/>
-        </Button>
-      </div>
-    </Wrapper>
-  )
-};
-
-export default Form

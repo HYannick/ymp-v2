@@ -1,10 +1,9 @@
 import React, {Fragment} from 'react';
-import {ListItemProps} from "./ListItems";
 
 interface ListProps {
   items: any[],
   onItemClick?: (item: object) => void,
-  itemTemplate: React.FC<ListItemProps>
+  itemTemplate: React.FC<any>
 }
 
 const List: React.FC<ListProps> = ({items, onItemClick, children, itemTemplate: ListItem}) => {

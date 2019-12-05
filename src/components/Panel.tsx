@@ -123,6 +123,7 @@ const Panel: React.FC<PanelTypes> = (props) => {
     isOpen: isPanelOpen,
     orientation
   };
+
   return (
     <Wrapper isOpen={isPanelOpen}>
       <Wrapper.Overlay {...panelProps} onClick={handleClose}/>

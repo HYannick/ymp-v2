@@ -11,8 +11,13 @@ const defaultContextData = {
 export const ThemeContext = React.createContext(defaultContextData);
 export const useTheme = () => React.useContext(ThemeContext);
 
-export const useDarkMode = () => {
-  const [themeState, setThemeState]: any = React.useState<{ dark: boolean, hasThemeMounted: boolean }>({
+interface darkThemeProps {
+  dark: boolean,
+  hasThemeMounted: boolean
+}
+
+export const useDarkMode = (): [darkThemeProps, (item: darkThemeProps) => void] => {
+  const [themeState, setThemeState] = React.useState<darkThemeProps>({
     dark: true,
     hasThemeMounted: false
   });

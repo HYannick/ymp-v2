@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import List from "components/List/List";
+import List from "components/List";
 import styled from '@emotion/styled';
 import {HistoryListItemTypes} from "app/App";
 import {HistoryListItem} from "components/List/ListItems";

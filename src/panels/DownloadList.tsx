@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from 'react';
-import List from "components/List/List";
+import List from "components/List";
 import {DownloadListItem} from "components/List/ListItems";
 import {jsx} from "@emotion/core";
 import styled from '@emotion/styled';
