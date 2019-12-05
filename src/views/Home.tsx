@@ -1,6 +1,7 @@
+/** @jsx jsx */
 import React, {Fragment} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {css} from "@emotion/core";
+import {css, jsx} from "@emotion/core";
 import styled from "@emotion/styled";
 import {useTranslation} from "react-i18next";
 import {lighten} from "polished";
